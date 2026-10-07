@@ -21,10 +21,10 @@ const CITIES = [
   {slug:'millau',  name:'Millau',  dep:'Aveyron (12)', urban:false, near:['Creissels','Saint-Georges-de-Luzençon','Aguessac','Nant']},
 ];
 const PHOTOS = [
-  ['haie.jpg','Samuel en nacelle pendant la taille d’une grande haie'],
+  ['haie.jpg','Taille d’une grande haie depuis la nacelle'],
   ['tilleul.jpg','Élagage d’un grand arbre depuis la nacelle'],
   ['abattage.jpg','Abattage d’un grand tronc près d’une maison'],
-  ['cedre.jpg','Samuel en nacelle dans un grand arbre'],
+  ['cedre.jpg','Élagage d’un grand arbre depuis la nacelle'],
   ['nacelle2.jpg','Camion-nacelle en intervention sur un arbre'],
   ['peupliers.jpg','Arbres étêtés en bordure de parking'],
 ];
@@ -50,11 +50,11 @@ const NAV = (root) => `<header><div class="wrap nav">
 CITIES.forEach((c,i)=>{
   const root='../', url=`${BASE}/elagage-${c.slug}/`;
   const title=`Élagage et abattage à ${c.name} — Samuel Élagage Abattage`;
-  const desc=`Élagueur à ${c.name} et alentours : élagage, abattage, taille de haie, débroussaillage avec camion-nacelle. Devis gratuit, déplacement gratuit. Appelez Samuel.`;
+  const desc=`Élagueur à ${c.name} et alentours : élagage, abattage, taille de haie, débroussaillage avec camion-nacelle. Devis gratuit, déplacement gratuit. Appelez-nous.`;
   const ph=[PHOTOS[i%PHOTOS.length],PHOTOS[(i+2)%PHOTOS.length]];
   const needs = c.urban
     ? `En ville, les arbres poussent souvent près des maisons, des murs et des parkings, et l’accès n’est pas toujours simple. Le camion-nacelle permet de travailler en hauteur sans abîmer le jardin, et de démonter un arbre morceau par morceau quand il n’y a pas la place de l’abattre d’un coup.`
-    : `Sur les terrains plus grands, les besoins sont souvent les haies longues, les arbres à élaguer autour de la maison et les parcelles à débroussailler. La nacelle permet d’atteindre les hauteurs en sécurité, et Samuel se déplace gratuitement pour établir le devis.`;
+    : `Sur les terrains plus grands, les besoins sont souvent les haies longues, les arbres à élaguer autour de la maison et les parcelles à débroussailler. La nacelle permet d’atteindre les hauteurs en sécurité, et nous nous déplaçons gratuitement pour établir le devis.`;
   const html = `<!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${title}</title>
@@ -75,21 +75,21 @@ ${NAV(root)}
 <p class="crumb"><a href="${root}">Accueil</a> › Élagage à ${c.name}</p>
 <span class="tag">${c.dep} · Devis gratuit</span>
 <h1>Élagage et abattage à <em>${c.name}</em></h1>
-<p class="lead">Samuel intervient à ${c.name} et dans les communes voisines : élagage, abattage, taille de haie, débroussaillage, avec son camion-nacelle.</p>
-<div class="cta"><a class="btn btn-lime" href="tel:{{PHONE_TEL}}">Appeler Samuel · {{PHONE_DISPLAY}}</a><a class="link" href="sms:{{PHONE_TEL}}">Ou envoyer un SMS</a></div>
+<p class="lead">Nous intervenons à ${c.name} et dans les communes voisines : élagage, abattage, taille de haie, débroussaillage, avec notre camion-nacelle.</p>
+<div class="cta"><a class="btn btn-lime" href="tel:{{PHONE_TEL}}">Nous appeler · {{PHONE_DISPLAY}}</a><a class="link" href="sms:{{PHONE_TEL}}">Ou envoyer un SMS</a></div>
 </div></div>
 <div class="band"><div class="wrap"><ul><li>Devis gratuit</li><li>Déplacement gratuit</li><li>Camion-nacelle</li><li>${c.name} et alentours</li></ul></div></div>
 <section><div class="wrap prose">
-<h2>Ce que Samuel fait à ${c.name}</h2>
+<h2>Ce que nous faisons à ${c.name}</h2>
 <ul class="ticks"><li>Élagage et taille d’arbres, même hauts ou difficiles d’accès</li><li>Abattage, y compris démontage en hauteur</li><li>Taille de haie depuis la nacelle</li><li>Débroussaillage et entretien d’espaces verts</li><li>Étêtage d’arbres devenus trop grands</li></ul>
 <h2>Des besoins différents selon le terrain</h2>
 <p>${needs}</p>
 <h2>Autour de ${c.name}</h2>
-<p>Samuel se déplace aussi à : ${c.near.map(n=>{const k=COMMUNES.find(x=>x.name===n);return k?`<a class="link" href="../elagage-${k.slug}/">${n}</a>`:n}).join(', ')}, et dans le reste du ${c.dep.split(' ')[0]}.</p>
+<p>Nous nous déplaçons aussi à : ${c.near.map(n=>{const k=COMMUNES.find(x=>x.name===n);return k?`<a class="link" href="../elagage-${k.slug}/">${n}</a>`:n}).join(', ')}, et dans le reste du ${c.dep.split(' ')[0]}.</p>
 <div class="photos2">${ph.map(p=>`<img src="${root}img/${p[0]}" alt="${p[1]}" loading="lazy">`).join('')}</div>
 </div></section>
 <section class="contact" id="contact"><div class="wrap"><div class="contact-box">
-<div><h2>Un arbre à faire voir à ${c.name} ?</h2><p style="margin:16px 0 0">Appelez Samuel ou envoyez-lui un SMS avec une photo : il vous répond et vous propose un devis gratuit.</p></div>
+<div><h2>Un arbre à faire voir à ${c.name} ?</h2><p style="margin:16px 0 0">Appelez-nous ou envoyez-nous un SMS avec une photo : nous vous répondons et vous proposons un devis gratuit.</p></div>
 <div><a class="big" href="tel:{{PHONE_TEL}}">{{PHONE_DISPLAY}}</a>
 <div class="cta" style="margin-top:20px"><a class="btn btn-lime" href="tel:{{PHONE_TEL}}">Appeler</a><a class="btn btn-out" href="sms:{{PHONE_TEL}}">Envoyer un SMS</a></div>
 <p class="note" style="margin-top:18px">Devis et déplacement gratuits.</p></div>
@@ -97,7 +97,7 @@ ${NAV(root)}
 <section style="background:var(--fog);padding:48px 0"><div class="wrap"><h2 style="font-size:1.6rem;margin-bottom:16px">Autres zones d’intervention</h2><div class="zone">${CITIES.filter(x=>x!==c).map(x=>`<a class="tag" href="../elagage-${x.slug}/">${x.name}</a>`).join('')}</div></div></section>
 </main>
 <footer><div class="wrap"><span>© 2026 Samuel Élagage Abattage</span><span>Tarn · Aveyron</span></div></footer>
-<div class="callbar"><a class="btn btn-lime" href="tel:{{PHONE_TEL}}">Appeler Samuel · Devis gratuit</a></div>
+<div class="callbar"><a class="btn btn-lime" href="tel:{{PHONE_TEL}}">Nous appeler · Devis gratuit</a></div>
 <script src="${root}js/track.js" defer></script>
 </body></html>`;
   fs.mkdirSync(`elagage-${c.slug}`,{recursive:true});
@@ -105,7 +105,7 @@ ${NAV(root)}
 });
 
 // ---------- 404, robots, sitemap ----------
-fs.writeFileSync('404.html', `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Page introuvable — Samuel Élagage Abattage</title><meta name="robots" content="noindex"><style>body{font-family:system-ui,sans-serif;background:#163300;color:#fff;min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px}a{display:inline-block;margin-top:18px;background:#9fe870;color:#163300;font-weight:600;padding:12px 26px;border-radius:999px;text-decoration:none}</style></head><body><div><h1>Cette page n’existe pas</h1><p>Mais Samuel, lui, est joignable.</p><a href="tel:${PHONE}">Appeler ${PHONE_DISPLAY}</a><br><a href="${BASE}/" style="background:transparent;color:#fff;border:1px solid #fff">Retour à l’accueil</a></div></body></html>`);
+fs.writeFileSync('404.html', `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Page introuvable — Samuel Élagage Abattage</title><meta name="robots" content="noindex"><style>body{font-family:system-ui,sans-serif;background:#163300;color:#fff;min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px}a{display:inline-block;margin-top:18px;background:#9fe870;color:#163300;font-weight:600;padding:12px 26px;border-radius:999px;text-decoration:none}</style></head><body><div><h1>Cette page n’existe pas</h1><p>Mais nous, nous sommes joignables.</p><a href="tel:${PHONE}">Appeler ${PHONE_DISPLAY}</a><br><a href="${BASE}/" style="background:transparent;color:#fff;border:1px solid #fff">Retour à l’accueil</a></div></body></html>`);
 fs.writeFileSync('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${BASE}/sitemap.xml\n`);
 const extra = [...buildExtra({BASE,PHONE,analytics,NAV,fill,TODAY}), ...buildCommunes({BASE,PHONE,analytics,NAV,fill,CITIES})];
 const urls=[`${BASE}/`,...CITIES.map(c=>`${BASE}/elagage-${c.slug}/`),...extra.map(p=>`${BASE}/${p}`)];

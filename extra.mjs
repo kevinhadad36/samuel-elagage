@@ -4,14 +4,14 @@ import fs from 'node:fs';
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 const FAQ = [
-  ['Dans quelles zones Samuel intervient-il ?', 'Dans tout le Tarn et l’Aveyron. Samuel est basé dans la région d’Albi et se déplace dans les deux départements.'],
+  ['Dans quelles zones intervenez-vous ?', 'Dans tout le Tarn et l’Aveyron. Nous sommes basés dans la région d’Albi et nous nous déplaçons dans les deux départements.'],
   ['Le devis est-il gratuit ?', 'Oui. Le devis et le déplacement sont gratuits.'],
-  ['Comment obtenir un devis ?', 'Appelez Samuel ou envoyez-lui un SMS avec une ou deux photos de l’arbre ou de la haie et votre commune. Il vous recontacte pour fixer la suite.'],
+  ['Comment obtenir un devis ?', 'Appelez-nous ou envoyez-nous un SMS avec une ou deux photos de l’arbre ou de la haie et votre commune. Nous vous recontactons pour fixer la suite.'],
   ['Pourquoi utiliser une nacelle ?', 'Le camion-nacelle permet de travailler en hauteur de façon stable, sur des arbres hauts ou de grandes haies, sans abîmer le jardin et sans grimper dans l’arbre pour chaque branche.'],
-  ['Quels travaux Samuel réalise-t-il ?', 'Élagage, abattage, étêtage, taille de haie, débroussaillage et entretien d’espaces verts.'],
+  ['Quels travaux réalisez-vous ?', 'Élagage, abattage, étêtage, taille de haie, débroussaillage et entretien d’espaces verts.'],
   ['Quand faut-il élaguer ?', 'Cela dépend de l’espèce et du but recherché. Nous détaillons les repères généraux dans notre article sur les bonnes périodes pour élaguer.', 'conseils/quand-elaguer-ses-arbres/'],
   ['Ai-je besoin d’une autorisation pour abattre un arbre ?', 'Pas toujours, mais certaines situations en demandent une. Voir notre article sur les autorisations d’abattage, et renseignez-vous en mairie avant de décider.', 'conseils/abattre-un-arbre-autorisation/'],
-  ['Qu’en est-il des déchets verts et du reste du chantier ?', 'C’est un point à préciser avec Samuel au moment du devis, pour que tout soit clair avant le début des travaux.'],
+  ['Qu’en est-il des déchets verts et du reste du chantier ?', 'C’est un point que nous précisons avec vous au moment du devis, pour que tout soit clair avant le début des travaux.'],
 ];
 
 const ARTICLES = [
@@ -33,7 +33,7 @@ const ARTICLES = [
 <h2>Débroussaillage et nettoyage</h2>
 <p>L’automne est aussi le moment de dégager les talus, les abords de maison et les parcelles envahies avant que la végétation ne retombe sous le poids de l’humidité.</p>
 <h2>Un doute sur un arbre ?</h2>
-<p>Envoyez une photo à Samuel avec votre commune : il vous dit ce qu’il en pense et vous propose un devis gratuit.</p>`,
+<p>Envoyez-nous une photo avec votre commune : nous vous disons ce que nous en pensons et nous vous proposons un devis gratuit.</p>`,
   },
   {
     slug: 'quand-elaguer-ses-arbres',
@@ -48,7 +48,7 @@ const ARTICLES = [
 <h2>Les cas particuliers</h2>
 <ul class="ticks"><li><b>Arbres fruitiers :</b> la période dépend de l’espèce, certains se taillent en fin d’hiver, d’autres après la récolte.</li><li><b>Conifères :</b> ils supportent généralement moins bien une taille sévère, mieux vaut un professionnel pour décider.</li><li><b>Branche dangereuse :</b> si une branche menace une maison, une route ou une ligne électrique, ne repoussez pas l’intervention.</li></ul>
 <h2>Un conseil simple</h2>
-<p>En cas de doute, envoyez une photo à Samuel : il vous dira ce qu’il conseille selon l’arbre et la saison.</p>`,
+<p>En cas de doute, envoyez-nous une photo : nous vous dirons ce que nous conseillons selon l’arbre et la saison.</p>`,
   },
   {
     slug: 'abattre-un-arbre-autorisation',
@@ -61,7 +61,7 @@ const ARTICLES = [
 <h2>Le bon réflexe</h2>
 <p>Appelez la mairie de votre commune avant de décider, en précisant l’adresse et la parcelle. Elle vous dira si une démarche est nécessaire.</p>
 <h2>Et le chantier lui-même ?</h2>
-<p>Quand l’abattage est possible, il peut se faire en démontant l’arbre morceau par morceau depuis la nacelle, utile près d’une maison ou d’un mur. Envoyez une photo à Samuel pour un devis gratuit.</p>`,
+<p>Quand l’abattage est possible, il peut se faire en démontant l’arbre morceau par morceau depuis la nacelle, utile près d’une maison ou d’un mur. Envoyez-nous une photo pour un devis gratuit.</p>`,
   },
   {
     slug: 'taille-de-haie-hauteur-distance',
@@ -76,7 +76,7 @@ const ARTICLES = [
 <h2>La bonne période</h2>
 <p>Comme pour les arbres, il est conseillé d’éviter la taille de mi-mars à fin juillet environ, parce que des oiseaux y nichent. Une taille à l’automne ou en fin d’hiver convient à beaucoup de haies, selon l’espèce.</p>
 <h2>Une grande haie ?</h2>
-<p>Pour les haies hautes ou longues, Samuel les taille depuis la nacelle. Envoyez-lui une photo pour un devis gratuit.</p>`,
+<p>Pour les haies hautes ou longues, nous les taillons depuis la nacelle. Envoyez-nous une photo pour un devis gratuit.</p>`,
   },
 ];
 
@@ -98,12 +98,12 @@ ${ld ? `<script type="application/ld+json">${JSON.stringify(ld)}</script>` : ''}
 ${analytics}
 </head><body>`;
   const cta = `<section class="contact" id="contact"><div class="wrap"><div class="contact-box">
-<div><h2>Un arbre ou une haie à faire voir ?</h2><p style="margin:16px 0 0">Appelez Samuel ou envoyez-lui un SMS avec une photo : il vous répond et vous propose un devis gratuit.</p></div>
+<div><h2>Un arbre ou une haie à faire voir ?</h2><p style="margin:16px 0 0">Appelez-nous ou envoyez-nous un SMS avec une photo : nous vous répondons et vous proposons un devis gratuit.</p></div>
 <div><a class="big" href="tel:{{PHONE_TEL}}">{{PHONE_DISPLAY}}</a>
 <div class="cta" style="margin-top:20px"><a class="btn btn-lime" href="tel:{{PHONE_TEL}}">Appeler</a><a class="btn btn-out" href="sms:{{PHONE_TEL}}">Envoyer un SMS</a></div>
 <p class="note" style="margin-top:18px">Devis et déplacement gratuits.</p></div></div></div></section>`;
   const foot = (r) => `<footer><div class="wrap"><span>© 2026 Samuel Élagage Abattage</span><span>Tarn · Aveyron</span></div></footer>
-<div class="callbar"><a class="btn btn-lime" href="tel:{{PHONE_TEL}}">Appeler Samuel · Devis gratuit</a></div>
+<div class="callbar"><a class="btn btn-lime" href="tel:{{PHONE_TEL}}">Nous appeler · Devis gratuit</a></div>
 <script src="${r}js/track.js" defer></script></body></html>`;
   const write = (dir, html, r) => {
     fs.mkdirSync(dir, { recursive: true });
@@ -113,7 +113,7 @@ ${analytics}
   // ---- FAQ (racine +1 niveau) ----
   const faqLd = { '@context': 'https://schema.org', '@type': 'FAQPage',
     mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
-  write('faq', `${head('Questions fréquentes — Samuel Élagage Abattage', 'Zone d’intervention, devis gratuit, nacelle, périodes d’élagage : les réponses de Samuel aux questions fréquentes.', 'faq/', faqLd)}
+  write('faq', `${head('Questions fréquentes — Samuel Élagage Abattage', 'Zone d’intervention, devis gratuit, nacelle, périodes d’élagage : nos réponses aux questions fréquentes.', 'faq/', faqLd)}
 ${NAV(root)}<main>
 <div class="page-hero"><div class="wrap"><p class="crumb"><a href="${root}">Accueil</a> › Questions fréquentes</p>
 <h1>Vos <em>questions</em></h1><p class="lead">Les réponses aux questions qu’on pose le plus souvent avant de demander un devis.</p></div></div>
@@ -122,7 +122,7 @@ ${cta}</main>${foot(root)}`, root);
 
   // ---- Blog ----
   const idxCards = ARTICLES.map(a => `<a class="card" href="${a.slug}/" style="text-decoration:none"><h3>${esc(a.title)}</h3><p>${esc(a.desc)}</p><span class="link">Lire l’article</span></a>`).join('');
-  write('conseils', `${head('Conseils élagage, abattage et haies — Samuel Élagage Abattage', 'Conseils pratiques de Samuel : quand élaguer, autorisation d’abattage, taille de haie.', 'conseils/')}
+  write('conseils', `${head('Conseils élagage, abattage et haies — Samuel Élagage Abattage', 'Nos conseils pratiques : quand élaguer, autorisation d’abattage, taille de haie.', 'conseils/')}
 ${NAV(root)}<main>
 <div class="page-hero"><div class="wrap"><p class="crumb"><a href="${root}">Accueil</a> › Conseils</p>
 <h1>Nos <em>conseils</em></h1><p class="lead">Des repères simples pour entretenir vos arbres et vos haies. Chaque cas est différent : pour le vôtre, demandez un devis gratuit.</p></div></div>

@@ -7,8 +7,12 @@
 
 ## Build
 Ne pas éditer index.html ni elagage-*/ à la main : tout est généré.
-- Source : `src/index.template.html`, `css/style.css`, `build.mjs` (villes), `extra.mjs` (FAQ + articles du blog « Conseils »), `communes.mjs` (10 pages communes, photos libres d’illustration dans img/stock-*, à remplacer par de vraies photos de Samuel dès qu’il en fournit). Pour ajouter un article : l’ajouter dans ARTICLES de extra.mjs, puis `node build.mjs`.
+- Source : `src/index.template.html`, `css/style.css`, `build.mjs` (villes), `extra.mjs` (FAQ + articles du blog « Conseils »), `communes.mjs` (10 pages communes, avec 2 photos réelles de Samuel par page, jamais la même deux fois sur une page). Pour ajouter un article : l’ajouter dans ARTICLES de extra.mjs, puis `node build.mjs`.
 - Régénérer : `node build.mjs`
 - Domaine acheté : samuelelagage.fr (GitHub Pages, fichier CNAME). Quand le numéro de suivi/Umami / le numéro de suivi / Umami sont prêts :
   `BASE=https://samuelelagage.fr PHONE=+33xxxxxxxxx UMAMI_ID=xxxx node build.mjs` puis commit + push.
 - Suivi par canal : ajouter `?src=facebook`, `?src=gbp`, `?src=nextdoor`… aux liens vers le site ; l'événement `appel` d'Umami porte la source.
+
+## Voix éditoriale
+- Tout le site parle à la première personne du pluriel (« nous »), ton chaleureux. Le nom « Samuel Élagage Abattage » reste la marque.
+- Photos : uniquement celles de Samuel (dossier img/), répétables d’une page à l’autre mais jamais deux fois sur la même page. Pas de photos libres.
