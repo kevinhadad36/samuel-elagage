@@ -3,6 +3,7 @@
 //         BASE=https://elagage-albi.fr PHONE=+33512345678 UMAMI_ID=xxxx node build.mjs
 import fs from 'node:fs';
 import { buildExtra } from './extra.mjs';
+import { buildCommunes, COMMUNES } from './communes.mjs';
 
 const BASE   = (process.env.BASE  || 'https://kevinhadad36.github.io/samuel-elagage').replace(/\/$/,'');
 const PHONE  = process.env.PHONE  || '+33674665241';           // format international, pour tel:
@@ -84,7 +85,7 @@ ${NAV(root)}
 <h2>Des besoins différents selon le terrain</h2>
 <p>${needs}</p>
 <h2>Autour de ${c.name}</h2>
-<p>Samuel se déplace aussi à : ${c.near.join(', ')}, et dans le reste du ${c.dep.split(' ')[0]}.</p>
+<p>Samuel se déplace aussi à : ${c.near.map(n=>{const k=COMMUNES.find(x=>x.name===n);return k?`<a class="link" href="../elagage-${k.slug}/">${n}</a>`:n}).join(', ')}, et dans le reste du ${c.dep.split(' ')[0]}.</p>
 <div class="photos2">${ph.map(p=>`<img src="${root}img/${p[0]}" alt="${p[1]}" loading="lazy">`).join('')}</div>
 </div></section>
 <section class="contact" id="contact"><div class="wrap"><div class="contact-box">
@@ -106,7 +107,7 @@ ${NAV(root)}
 // ---------- 404, robots, sitemap ----------
 fs.writeFileSync('404.html', `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Page introuvable — Samuel Élagage Abattage</title><meta name="robots" content="noindex"><style>body{font-family:system-ui,sans-serif;background:#163300;color:#fff;min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px}a{display:inline-block;margin-top:18px;background:#9fe870;color:#163300;font-weight:600;padding:12px 26px;border-radius:999px;text-decoration:none}</style></head><body><div><h1>Cette page n’existe pas</h1><p>Mais Samuel, lui, est joignable.</p><a href="tel:${PHONE}">Appeler ${PHONE_DISPLAY}</a><br><a href="${BASE}/" style="background:transparent;color:#fff;border:1px solid #fff">Retour à l’accueil</a></div></body></html>`);
 fs.writeFileSync('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${BASE}/sitemap.xml\n`);
-const extra = buildExtra({BASE,PHONE,analytics,NAV,fill,TODAY});
+const extra = [...buildExtra({BASE,PHONE,analytics,NAV,fill,TODAY}), ...buildCommunes({BASE,PHONE,analytics,NAV,fill,CITIES})];
 const urls=[`${BASE}/`,...CITIES.map(c=>`${BASE}/elagage-${c.slug}/`),...extra.map(p=>`${BASE}/${p}`)];
 fs.writeFileSync('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u=>`  <url><loc>${u}</loc><lastmod>${TODAY}</lastmod></url>`).join('\n')}\n</urlset>\n`);
 console.log('OK', urls.length, 'pages');
