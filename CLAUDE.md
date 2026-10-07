@@ -9,6 +9,6 @@
 Ne pas éditer index.html ni elagage-*/ à la main : tout est généré.
 - Source : `src/index.template.html`, `css/style.css`, `build.mjs` (villes, textes des pages ville).
 - Régénérer : `node build.mjs`
-- Quand le domaine / le numéro de suivi / Umami sont prêts :
-  `BASE=https://mon-domaine.fr PHONE=+33xxxxxxxxx UMAMI_ID=xxxx node build.mjs` puis commit + push.
+- Domaine acheté : samuelelagage.fr (GitHub Pages, fichier CNAME). Quand le numéro de suivi/Umami / le numéro de suivi / Umami sont prêts :
+  `BASE=https://samuelelagage.fr PHONE=+33xxxxxxxxx UMAMI_ID=xxxx node build.mjs` puis commit + push.
 - Suivi par canal : ajouter `?src=facebook`, `?src=gbp`, `?src=nextdoor`… aux liens vers le site ; l'événement `appel` d'Umami porte la source.
