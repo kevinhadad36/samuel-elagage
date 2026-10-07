@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://samuelelagage.fr/sitemap.xml
+Sitemap: https://kevinhadad36.github.io/samuel-elagage/sitemap.xml

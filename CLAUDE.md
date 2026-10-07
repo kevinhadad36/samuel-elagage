@@ -7,7 +7,7 @@
 
 ## Build
 Ne pas éditer index.html ni elagage-*/ à la main : tout est généré.
-- Source : `src/index.template.html`, `css/style.css`, `build.mjs` (villes, textes des pages ville).
+- Source : `src/index.template.html`, `css/style.css`, `build.mjs` (villes), `extra.mjs` (FAQ + articles du blog « Conseils »). Pour ajouter un article : l’ajouter dans ARTICLES de extra.mjs, puis `node build.mjs`.
 - Régénérer : `node build.mjs`
 - Domaine acheté : samuelelagage.fr (GitHub Pages, fichier CNAME). Quand le numéro de suivi/Umami / le numéro de suivi / Umami sont prêts :
   `BASE=https://samuelelagage.fr PHONE=+33xxxxxxxxx UMAMI_ID=xxxx node build.mjs` puis commit + push.

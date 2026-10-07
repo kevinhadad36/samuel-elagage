@@ -2,6 +2,7 @@
 // Usage : node build.mjs            (utilise la config ci-dessous)
 //         BASE=https://elagage-albi.fr PHONE=+33512345678 UMAMI_ID=xxxx node build.mjs
 import fs from 'node:fs';
+import { buildExtra } from './extra.mjs';
 
 const BASE   = (process.env.BASE  || 'https://kevinhadad36.github.io/samuel-elagage').replace(/\/$/,'');
 const PHONE  = process.env.PHONE  || '+33674665241';           // format international, pour tel:
@@ -42,7 +43,7 @@ fs.writeFileSync('index.html', fill(idx,''));
 // ---------- pages ville ----------
 const NAV = (root) => `<header><div class="wrap nav">
 <a class="logo" href="${root}">Samuel<span>ÉLAGAGE · ABATTAGE</span></a>
-<ul><li><a href="${root}#services">Services</a></li><li><a href="${root}#realisations">Réalisations</a></li><li><a href="${root}#zone">Zone</a></li><li><a href="#contact">Contact</a></li></ul>
+<ul><li><a href="${root}#services">Services</a></li><li><a href="${root}#realisations">Réalisations</a></li><li><a href="${root}#zone">Zone</a></li><li><a href="${root}conseils/">Conseils</a></li><li><a href="#contact">Contact</a></li></ul>
 <a class="btn btn-lime" href="tel:{{PHONE_TEL}}">Appeler</a></div></header>`;
 
 CITIES.forEach((c,i)=>{
@@ -105,6 +106,7 @@ ${NAV(root)}
 // ---------- 404, robots, sitemap ----------
 fs.writeFileSync('404.html', `<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Page introuvable — Samuel Élagage Abattage</title><meta name="robots" content="noindex"><style>body{font-family:system-ui,sans-serif;background:#163300;color:#fff;min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px}a{display:inline-block;margin-top:18px;background:#9fe870;color:#163300;font-weight:600;padding:12px 26px;border-radius:999px;text-decoration:none}</style></head><body><div><h1>Cette page n’existe pas</h1><p>Mais Samuel, lui, est joignable.</p><a href="tel:${PHONE}">Appeler ${PHONE_DISPLAY}</a><br><a href="${BASE}/" style="background:transparent;color:#fff;border:1px solid #fff">Retour à l’accueil</a></div></body></html>`);
 fs.writeFileSync('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${BASE}/sitemap.xml\n`);
-const urls=[`${BASE}/`,...CITIES.map(c=>`${BASE}/elagage-${c.slug}/`)];
+const extra = buildExtra({BASE,PHONE,analytics,NAV,fill,TODAY});
+const urls=[`${BASE}/`,...CITIES.map(c=>`${BASE}/elagage-${c.slug}/`),...extra.map(p=>`${BASE}/${p}`)];
 fs.writeFileSync('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u=>`  <url><loc>${u}</loc><lastmod>${TODAY}</lastmod></url>`).join('\n')}\n</urlset>\n`);
 console.log('OK', urls.length, 'pages');
