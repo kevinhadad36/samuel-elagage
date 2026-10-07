@@ -8,19 +8,18 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Samuel Élagage Abattage — Tarn et Aveyron">
 <meta property="og:description" content="Élagage, abattage, taille de haie, débroussaillage. Camion-nacelle. Devis gratuit.">
-<link rel="canonical" href="https://kevinhadad36.github.io/samuel-elagage/">
+<link rel="canonical" href="{{BASE}}/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<meta property="og:url" content="https://kevinhadad36.github.io/samuel-elagage/">
-<meta property="og:image" content="https://kevinhadad36.github.io/samuel-elagage/img/haie.jpg">
+<meta property="og:url" content="{{BASE}}/">
+<meta property="og:image" content="{{BASE}}/img/haie.jpg">
 <meta name="theme-color" content="#163300">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LocalBusiness","name":"Samuel Élagage Abattage","description":"Élagage, abattage, taille de haie, débroussaillage et entretien d'espaces verts avec camion-nacelle.","telephone":"+33674665241","areaServed":[{"@type":"AdministrativeArea","name":"Tarn"},{"@type":"AdministrativeArea","name":"Aveyron"}],"address":{"@type":"PostalAddress","addressRegion":"Occitanie","addressCountry":"FR"}}
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"Samuel Élagage Abattage","description":"Élagage, abattage, taille de haie, débroussaillage et entretien d'espaces verts avec camion-nacelle.","telephone":"{{PHONE_TEL}}","areaServed":[{"@type":"AdministrativeArea","name":"Tarn"},{"@type":"AdministrativeArea","name":"Aveyron"}],"address":{"@type":"PostalAddress","addressRegion":"Occitanie","addressCountry":"FR"}}
 </script>
-<link rel="stylesheet" href="css/style.css">
-
+<link rel="stylesheet" href="{{ROOT}}css/style.css">
 </head>
 <body>
 
@@ -33,7 +32,7 @@
       <li><a href="#zone">Zone</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <a class="btn btn-lime" href="tel:+33674665241">Appeler</a>
+    <a class="btn btn-lime" href="tel:{{PHONE_TEL}}">Appeler</a>
   </div>
 </header>
 
@@ -45,7 +44,7 @@
       <h1>Vos arbres, <em>entre de bonnes mains.</em></h1>
       <p class="lead">Élagage, abattage, taille de haie et débroussaillage. Samuel intervient chez vous avec son camion-nacelle, même là où l'accès est compliqué.</p>
       <div class="cta">
-        <a class="btn btn-lime" href="tel:+33674665241">Appeler Samuel · 06 74 66 52 41</a>
+        <a class="btn btn-lime" href="tel:{{PHONE_TEL}}">Appeler Samuel · {{PHONE_DISPLAY}}</a>
         <a class="link" href="#realisations">Voir ses chantiers</a>
       </div>
     </div>
@@ -122,7 +121,7 @@
     </div>
     <div class="zone"><span class="tag">Tarn (81)</span><span class="tag">Aveyron (12)</span></div>
     <p style="margin-top:24px;font-weight:600;color:var(--ink)">Interventions près de chez vous :</p>
-    <div class="zone"><a class="tag" href="elagage-albi/">Albi</a><a class="tag" href="elagage-castres/">Castres</a><a class="tag" href="elagage-gaillac/">Gaillac</a><a class="tag" href="elagage-carmaux/">Carmaux</a><a class="tag" href="elagage-mazamet/">Mazamet</a><a class="tag" href="elagage-rodez/">Rodez</a><a class="tag" href="elagage-millau/">Millau</a></div>
+    <div class="zone">{{CITY_LINKS}}</div>
   </div>
 </section>
 
@@ -134,10 +133,10 @@
         <p style="margin:16px 0 0">Appelez Samuel ou envoyez-lui un SMS avec une photo : il vous répond et vous propose un devis gratuit.</p>
       </div>
       <div>
-        <a class="big" href="tel:+33674665241">06 74 66 52 41</a>
+        <a class="big" href="tel:{{PHONE_TEL}}">{{PHONE_DISPLAY}}</a>
         <div class="cta" style="margin-top:20px">
-          <a class="btn btn-lime" href="tel:+33674665241">Appeler</a>
-          <a class="btn btn-out" href="sms:+33674665241">Envoyer un SMS</a>
+          <a class="btn btn-lime" href="tel:{{PHONE_TEL}}">Appeler</a>
+          <a class="btn btn-out" href="sms:{{PHONE_TEL}}">Envoyer un SMS</a>
         </div>
         <p class="note" style="margin-top:18px">Devis et déplacement gratuits.</p>
       </div>
@@ -150,7 +149,7 @@
   <div class="wrap"><span>© 2026 Samuel Élagage Abattage</span><span>Tarn · Aveyron</span></div>
 </footer>
 
-<div class="callbar"><a class="btn btn-lime" href="tel:+33674665241">Appeler Samuel · Devis gratuit</a></div>
+<div class="callbar"><a class="btn btn-lime" href="tel:{{PHONE_TEL}}">Appeler Samuel · Devis gratuit</a></div>
 
 <script>
 (function(){
