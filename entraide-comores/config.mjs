@@ -6,7 +6,7 @@ export const CONFIG = {
   NAME:        env.NAME        || 'Réseau des entrepreneurs comoriens de Toulouse',
   SHORT:       env.SHORT       || 'Réseau Comores Toulouse',
   // Adresse publique du site (sans / final). Sert aux balises de partage WhatsApp.
-  BASE:        (env.BASE       || 'https://kevinhadad36.github.io/samuel-elagage/entraide-comores').replace(/\/$/, ''),
+  BASE:        (env.BASE       || 'https://kevinhadad36.github.io/entraide-comores-toulouse').replace(/\/$/, ''),
 
   // Contacts (vides = masqués)
   EMAIL:       env.EMAIL       || '',
