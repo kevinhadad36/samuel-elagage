@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>La Table du Grand Marché</title>
-<meta name="description" content="La Table du Grand Marché, épicerie afro exotique au 6 allée Henri Sellier à Empalot, Toulouse : attiéké, placali, igname, poisson fumé, huile rouge, plats à emporter. Click &amp; collect par WhatsApp.">
+<meta name="description" content="La Table du Grand Marché, épicerie afro exotique au 6 allée Henri Sellier à Empalot, Toulouse : attiéké, placali, igname, poisson fumé, huile rouge, plats à emporter. Faites votre liste, on la met de côté : envoi par WhatsApp.">
 <meta property="og:title" content="La Table du Grand Marché · Épicerie afro exotique à Empalot">
-<meta property="og:description" content="Les saveurs d'Afrique près de chez vous. Commandez sur WhatsApp, on met de côté, vous passez à l'heure choisie.">
+<meta property="og:description" content="Les saveurs d'Afrique près de chez vous. Faites votre liste, choisissez l'heure, on met de côté.">
 <meta property="og:image" content="images/facade.jpg">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#823513">
@@ -37,20 +37,21 @@
 }
 </script>
 <style>
-  /* Style Refero « Hungry Tiger » : une enseigne de marché aux épices.
-     Toile rouille partout, profondeur par trois bruns, un seul accent or, titres d'affiche géants, contrôles en pilule. */
+  /* Style Refero « Hungry Tiger » : une affiche de marché aux épices.
+     Mise en page : une affiche typographique, puis une liste de courses par rayon tenue à côté d'un bon de retrait (ticket) toujours visible. */
   :root{
-    --rust:#823513;      /* toile de toutes les sections */
-    --saffron:#9f531b;   /* bordures décoratives, texte intermédiaire */
-    --cardamom:#6b2e12;  /* séparateurs, bordures de champs */
-    --spice:#402011;     /* cartes, champs */
+    --rust:#823513;      /* toile */
+    --saffron:#9f531b;   /* bordures, texte intermédiaire */
+    --cardamom:#6b2e12;  /* séparateurs */
+    --spice:#402011;     /* surfaces */
     --clove:#281006;     /* surface la plus profonde */
-    --gold:#faae33;      /* accent unique : actions, titres soulignés */
-    --chili:#d1255c;     /* réservé aux badges « prix affiché » */
-    --cream:#fbe6c8;     /* texte courant */
-    --cream-soft:#e7c9a4;
+    --gold:#faae33;      /* accent unique */
+    --chili:#d1255c;     /* prix lus en rayon */
+    --cream:#fbe6c8;
+    --cream-soft:#e2c39c;
     --display:"Antonio","Bebas Neue","Arial Narrow",Impact,sans-serif;
     --body:"Figtree","Helvetica Neue",Arial,sans-serif;
+    --gut:clamp(16px,4vw,48px);
     color-scheme:dark;
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -60,378 +61,281 @@
   body{background:var(--rust);color:var(--cream);font-family:var(--body);font-size:16px;line-height:1.4;overflow-x:hidden}
   img{display:block;max-width:100%}
   a{color:inherit}
-  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
-  .wrap{max-width:1440px;margin:0 auto;padding-inline:clamp(16px,4vw,48px)}
-  .lbl{font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.06em;font-size:14px;color:var(--gold)}
-  .rule{border:0;border-top:2px dotted var(--gold);opacity:.7;max-width:1344px;margin-inline:max(clamp(16px,4vw,48px),calc((100% - 1344px)/2))}
+  a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  .wrap{max-width:1440px;margin:0 auto;padding-inline:var(--gut)}
   h1,h2,h3{font-family:var(--display);font-weight:700;text-transform:uppercase;text-wrap:balance}
-  h2{font-size:clamp(48px,9vw,120px);line-height:.95;letter-spacing:-.015em}
+  .eyebrow{font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.08em;font-size:15px;color:var(--gold)}
+  .dots{border:0;border-top:2px dotted var(--gold);opacity:.75}
 
-  /* boutons pilule */
-  .pill,.ghost{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:9999px;padding:14px 26px;min-height:50px;font-family:var(--display);font-weight:500;font-size:18px;text-transform:uppercase;letter-spacing:.04em;text-decoration:none;cursor:pointer;border:2px solid var(--gold)}
+  .pill,.ghost{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:9999px;padding:13px 24px;min-height:48px;font-family:var(--display);font-weight:500;font-size:18px;text-transform:uppercase;letter-spacing:.04em;text-decoration:none;cursor:pointer;border:2px solid var(--gold)}
   .pill{background:var(--gold);color:var(--clove)}
   .pill:hover{background:#ffc25a}
   .ghost{background:transparent;color:var(--gold)}
   .ghost:hover{background:var(--spice)}
   .pill svg,.ghost svg{width:20px;height:20px;flex:none}
 
-  /* NAV */
-  .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:var(--clove);border-bottom:2px dotted var(--saffron)}
-  .nav .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:12px}
-  .brand{font-family:var(--display);font-weight:700;font-size:22px;text-transform:uppercase;text-decoration:none;letter-spacing:.01em;white-space:nowrap}
-  .brand b{color:var(--gold);font-weight:700}
-  .nav ul{list-style:none;display:flex;gap:22px;align-items:center;font-family:var(--display);text-transform:uppercase;font-size:16px;letter-spacing:.05em}
-  .nav ul a{text-decoration:none;padding:6px 0;border-bottom:2px dotted transparent}
-  .nav ul a:hover{border-bottom-color:var(--gold)}
-  .nav .pill{min-height:40px;padding:8px 18px;font-size:16px}
-  @media (max-width:820px){ .nav ul li:not(:last-child){display:none} }
+  /* barre d'adresse (pas de menu flottant) */
+  .strip{background:var(--clove);font-size:14px}
+  .strip .wrap{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center;justify-content:space-between;padding-block:10px}
+  .strip .l{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:center}
+  .state{display:inline-flex;align-items:center;gap:8px;font-weight:600}
+  .state i{width:9px;height:9px;border-radius:50%;background:#7fd16b;flex:none}
+  .state.closed i{background:var(--chili)}
+  .strip a{color:var(--gold);font-weight:600;text-decoration:none;font-variant-numeric:tabular-nums}
 
-  /* HERO */
-  .hero{padding-block:clamp(28px,5vw,64px) clamp(40px,6vw,80px)}
-  .hero .kicker{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-bottom:18px}
-  .open{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;background:var(--spice);border-radius:9999px;padding:7px 14px}
-  .open i{width:9px;height:9px;border-radius:50%;background:#7fd16b;flex:none}
-  .open.closed i{background:var(--chili)}
-  .hero h1{font-size:clamp(64px,15.5vw,224px);line-height:1;letter-spacing:-.02em;color:var(--cream)}
-  .hero h1 em{font-style:normal;color:var(--gold);display:block}
-  .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(20px,4vw,56px);align-items:end;margin-top:clamp(28px,4vw,48px)}
-  .hero-copy{display:grid;gap:22px;min-width:0}
-  .hero-copy p.lead{font-size:clamp(18px,2vw,22px);line-height:1.35;max-width:34ch;color:var(--cream)}
-  .hero-copy p.lead b{color:var(--gold);font-weight:600}
-  .ctas{display:flex;gap:12px;flex-wrap:wrap}
-  .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-  .fact{background:var(--spice);border-radius:6px;padding:12px 14px;display:grid;gap:2px;min-width:0}
-  .fact span{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--cream-soft)}
-  .fact b{font-family:var(--display);font-size:22px;font-weight:500;color:var(--gold);font-variant-numeric:tabular-nums}
-  .hero figure{position:relative;border-radius:6px;overflow:hidden;aspect-ratio:4/3;max-width:100%;background:var(--clove)}
-  .hero figure img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
-  .hero figcaption{position:absolute;left:12px;bottom:12px;background:var(--clove);color:var(--gold);font-family:var(--display);text-transform:uppercase;letter-spacing:.05em;font-size:14px;padding:6px 12px;border-radius:9999px}
-  @media (max-width:860px){ .hero-grid{grid-template-columns:1fr} .facts{grid-template-columns:repeat(3,minmax(0,1fr))} }
-  @media (max-width:420px){ .facts{grid-template-columns:1fr 1fr} .fact:last-child{grid-column:1/-1} }
+  /* AFFICHE */
+  .poster{padding-block:clamp(24px,4vw,48px) 0;text-align:center}
+  .poster .eyebrow{margin-bottom:clamp(10px,2vw,20px)}
+  .poster h1{font-size:clamp(54px,13.6vw,212px);line-height:.95;letter-spacing:-.015em}
+  .poster h1 span{display:block;color:var(--gold)}
+  .poster .tag{font-family:var(--display);font-weight:500;text-transform:uppercase;font-size:clamp(20px,2.6vw,32px);letter-spacing:.03em;margin-top:clamp(14px,2vw,24px)}
+  .poster .ctas{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:clamp(20px,3vw,32px)}
+  .band{display:grid;grid-template-columns:1.25fr 1fr 1fr 1fr;gap:10px;margin-top:clamp(32px,5vw,64px)}
+  .band figure{position:relative;aspect-ratio:3/4;border-radius:6px;overflow:hidden;background:var(--clove);max-width:100%}
+  .band figure:first-child{aspect-ratio:auto}
+  .band img{width:100%;height:100%;object-fit:cover}
+  .band figure:first-child img{position:absolute;inset:0}
+  .band figcaption{position:absolute;left:8px;bottom:8px;background:var(--clove);color:var(--gold);font-family:var(--display);text-transform:uppercase;letter-spacing:.05em;font-size:13px;padding:4px 10px;border-radius:9999px}
+  @media (max-width:760px){ .band{grid-template-columns:1fr 1fr} .band figure:first-child{grid-column:1/-1;aspect-ratio:4/3} .band figure:first-child img{position:static} .band figure:last-child{display:none} }
 
-  /* bandeau produits */
-  .ticker{background:var(--gold);color:var(--clove);overflow:hidden;white-space:nowrap}
-  .ticker div{display:inline-flex;gap:26px;padding:12px 0;animation:tick 40s linear infinite;font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(20px,2.6vw,30px);letter-spacing:.01em}
-  .ticker b{color:var(--rust)}
-  @keyframes tick{to{transform:translateX(-50%)}}
-  @media (prefers-reduced-motion:reduce){ .ticker div{animation:none} }
+  section{padding-block:clamp(56px,8vw,104px)}
+  .sec-title{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px 32px;margin-bottom:clamp(24px,3vw,40px)}
+  .sec-title h2{font-size:clamp(46px,8vw,110px);line-height:.95;letter-spacing:-.015em}
+  .sec-title p{max-width:44ch;font-size:17px;color:var(--cream)}
 
-  section{padding-block:clamp(56px,8vw,112px)}
-  .head{display:grid;gap:18px;margin-bottom:clamp(28px,4vw,48px)}
-  .head p{max-width:56ch;font-size:18px;color:var(--cream)}
+  /* LISTE + TICKET */
+  .shop{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:clamp(20px,3vw,40px);align-items:start}
+  @media (max-width:980px){ .shop{grid-template-columns:1fr} }
+  .jump{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+  .jump a{font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.04em;font-size:15px;text-decoration:none;border:2px solid var(--saffron);border-radius:9999px;padding:6px 14px}
+  .jump a:hover{border-color:var(--gold);color:var(--gold)}
+  .aisle{padding-top:28px;scroll-margin-top:16px}
+  .aisle h3{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;font-size:clamp(30px,3.6vw,44px);line-height:1;color:var(--gold);padding-bottom:10px;border-bottom:2px dotted var(--gold)}
+  .aisle h3 small{font-family:var(--body);font-size:14px;font-weight:500;text-transform:none;color:var(--cream-soft);letter-spacing:0}
+  .rows{list-style:none}
+  .rows li{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px 0;border-bottom:2px dotted var(--cardamom)}
+  .rows .th{width:52px;height:52px;border-radius:50%;overflow:hidden;background:var(--clove);display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:22px;color:var(--saffron)}
+  .rows .th img{width:100%;height:100%;object-fit:cover}
+  .rows .n{min-width:0}
+  .rows .n b{display:block;font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:21px;line-height:1.05;letter-spacing:.01em}
+  .rows .n span{font-size:14px;color:var(--cream-soft)}
+  .rows .n em{font-style:normal;font-size:12px;font-weight:600;background:var(--chili);color:#fff;border-radius:9999px;padding:2px 8px;margin-left:6px;white-space:nowrap}
+  .step{display:flex;align-items:center;gap:4px}
+  .step button{width:40px;height:40px;border-radius:50%;border:2px solid var(--gold);background:transparent;color:var(--gold);font-size:22px;line-height:1;cursor:pointer}
+  .step button.plus{background:var(--gold);color:var(--clove)}
+  .step button:disabled{opacity:.25;cursor:default}
+  .step output{min-width:26px;text-align:center;font-family:var(--display);font-weight:700;font-size:20px;font-variant-numeric:tabular-nums}
+  .rows li.on .n b{color:var(--gold)}
+  .miss{margin-top:20px;font-size:15px;color:var(--cream-soft)}
 
-  /* CLICK & COLLECT */
-  .steps{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:28px;counter-reset:s}
-  .steps li{counter-increment:s;background:var(--spice);border-radius:6px;padding:16px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;font-weight:500}
-  .steps li::before{content:counter(s);font-family:var(--display);font-weight:700;font-size:34px;line-height:1;color:var(--gold)}
-  @media (max-width:720px){ .steps{grid-template-columns:1fr} }
-  .cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
-  .cats button{font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.04em;font-size:16px;border-radius:9999px;padding:8px 16px;border:2px solid var(--saffron);background:transparent;color:var(--cream);cursor:pointer}
-  .cats button[aria-selected="true"]{background:var(--gold);border-color:var(--gold);color:var(--clove)}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
-  .prod{background:var(--spice);border-radius:6px;padding:12px;display:grid;grid-template-rows:auto auto 1fr auto;gap:8px;min-width:0}
-  .prod .pic{aspect-ratio:1;border-radius:4px;overflow:hidden;background:var(--clove);max-width:100%}
-  .prod .pic img{width:100%;height:100%;object-fit:cover}
-  .prod .pic.none{display:flex;align-items:flex-end;padding:12px;background:var(--clove);border:2px dotted var(--cardamom)}
-  .prod .pic.none span{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(26px,3vw,34px);line-height:.9;color:var(--saffron);overflow-wrap:anywhere}
-  .prod h3{font-size:22px;line-height:1;letter-spacing:.01em}
-  .prod .d{font-size:14px;color:var(--cream-soft);line-height:1.3}
-  .prod .price{justify-self:start;font-size:13px;font-weight:600;border-radius:9999px;padding:3px 10px;background:var(--clove);color:var(--cream-soft)}
-  .prod .price.real{background:var(--chili);color:#fff}
-  .prod .act{display:flex}
-  .add{flex:1;border-radius:9999px;border:2px solid var(--gold);background:transparent;color:var(--gold);font-family:var(--display);font-weight:500;text-transform:uppercase;letter-spacing:.04em;font-size:16px;padding:9px;cursor:pointer;min-height:44px}
-  .add:hover{background:var(--gold);color:var(--clove)}
-  .qty{flex:1;display:flex;align-items:center;justify-content:space-between;background:var(--gold);color:var(--clove);border-radius:9999px;min-height:44px;padding:0 4px}
-  .qty button{width:38px;height:38px;border-radius:50%;border:0;background:var(--clove);color:var(--gold);font-size:22px;line-height:1;cursor:pointer}
-  .qty span{font-family:var(--display);font-weight:700;font-size:20px;font-variant-numeric:tabular-nums}
-  .note{margin-top:18px;font-size:14px;color:var(--cream-soft)}
+  .ticket{position:sticky;top:calc(16px + env(safe-area-inset-top,0px));background:var(--cream);color:var(--clove);border-radius:6px;padding:26px 20px 20px;display:grid;gap:16px;max-height:calc(100vh - 32px);overflow:auto;
+    -webkit-mask:radial-gradient(circle 9px at 50% 0,#0000 98%,#000) top/22px 100% repeat-x;mask:radial-gradient(circle 9px at 50% 0,#0000 98%,#000) top/22px 100% repeat-x;scroll-margin-top:16px}
+  @media (max-width:980px){ .ticket{position:static;max-height:none} }
+  .ticket h3{font-size:34px;line-height:1;text-align:center}
+  .ticket .sub{text-align:center;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--saffron);font-weight:600}
+  .tl{list-style:none;border-block:2px dashed var(--saffron);padding-block:6px;font-size:15px}
+  .tl li{display:flex;justify-content:space-between;gap:12px;padding:5px 0}
+  .tl li b{font-variant-numeric:tabular-nums}
+  .tl .none{color:var(--saffron)}
+  .ticket .lab{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--saffron);margin-bottom:8px}
+  .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chips button{border:2px solid var(--clove);background:transparent;color:var(--clove);border-radius:9999px;padding:6px 11px;font:600 14px/1 var(--body);cursor:pointer;font-variant-numeric:tabular-nums}
+  .chips button[aria-pressed="true"]{background:var(--clove);color:var(--gold)}
+  .chips button:disabled{opacity:.35;cursor:default}
+  .fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .fields label{display:grid;gap:5px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--saffron)}
+  .fields label.full{grid-column:1/-1}
+  .ticket input,.ticket textarea{font:inherit;font-size:16px;text-transform:none;letter-spacing:0;color:var(--clove);background:#fff6e8;border:2px solid var(--cream-soft);border-radius:10px;padding:10px 12px;width:100%;min-width:0}
+  .ticket textarea{min-height:64px;resize:vertical}
+  .send{width:100%;background:var(--clove);color:var(--gold);border-color:var(--clove)}
+  .send:hover{background:var(--spice)}
+  .send[aria-disabled="true"]{opacity:.45;cursor:default}
+  .ticket .why{font-size:13px;color:var(--saffron);text-align:center}
+  .ticket .clear{justify-self:center;border:0;background:none;color:var(--saffron);text-decoration:underline;font:inherit;font-size:13px;cursor:pointer}
 
-  /* panier */
-  .cartbtn{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:45;display:none;align-items:center;gap:10px;background:var(--gold);color:var(--clove);border:0;border-radius:9999px;padding:14px 22px;font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:18px;letter-spacing:.03em;cursor:pointer}
-  .cartbtn.on{display:inline-flex}
-  .cartbtn i{font-style:normal;background:var(--clove);color:var(--gold);border-radius:9999px;min-width:28px;padding:2px 8px;text-align:center}
-  .cart{position:fixed;inset:0;z-index:60;background:rgba(40,16,6,.72);display:flex;justify-content:flex-end}
-  .panel{width:min(460px,100%);height:100%;overflow-y:auto;background:var(--clove);border-left:2px dotted var(--gold);padding:calc(20px + env(safe-area-inset-top,0px)) 20px calc(24px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:18px}
-  .panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
-  .panel-head h3{font-size:34px;line-height:1}
-  .x{border:2px solid var(--saffron);background:transparent;color:var(--cream);border-radius:9999px;padding:8px 14px;font-family:var(--display);text-transform:uppercase;font-size:15px;cursor:pointer}
-  .lines{list-style:none;display:grid}
-  .lines li{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:10px 0;border-bottom:2px dotted var(--cardamom);font-size:15px}
-  .lines li b{color:var(--gold);font-family:var(--display);font-size:18px;font-weight:700;margin-right:4px}
-  .lines button{border:0;background:none;color:var(--cream-soft);text-decoration:underline;cursor:pointer;font:inherit;font-size:13px}
-  .empty{color:var(--cream-soft)}
-  form.checkout{display:grid;gap:14px}
-  label{display:grid;gap:6px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--cream-soft)}
-  input,select,textarea{font:inherit;font-size:16px;text-transform:none;letter-spacing:0;color:var(--cream);background:var(--spice);border:2px solid var(--cardamom);border-radius:9999px;padding:12px 16px;width:100%;min-width:0}
-  textarea{border-radius:18px;resize:vertical;min-height:70px}
-  .two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .fine{font-size:13px;color:var(--cream-soft)}
-  .done{background:var(--spice);border-radius:6px;padding:16px;display:grid;gap:12px}
-  .done pre{white-space:pre-wrap;font-family:var(--body);font-size:14px;line-height:1.45;color:var(--cream);background:var(--clove);border-radius:6px;padding:12px;max-height:240px;overflow:auto}
-  .done .row{display:flex;gap:10px;flex-wrap:wrap}
+  .mbar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:30;display:none}
+  .mbar a{width:100%}
+  @media (max-width:980px){ .mbar.on{display:block} }
 
-  /* RAYONS / photos */
-  .rayons{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:12px}
-  .rayons figure{position:relative;border-radius:6px;overflow:hidden;background:var(--clove);max-width:100%}
-  .rayons figure img{width:100%;height:100%;object-fit:cover}
-  .rayons figcaption{position:absolute;left:10px;bottom:10px;background:var(--clove);color:var(--gold);font-family:var(--display);text-transform:uppercase;letter-spacing:.05em;font-size:14px;padding:5px 11px;border-radius:9999px}
-  .r1{grid-column:span 5;grid-row:span 2;min-height:320px}
-  .r1 img{position:absolute;inset:0}
-  .r2,.r3{grid-column:span 7;aspect-ratio:16/9}
-  .aisle{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:12px}
-  .aisle div{background:var(--spice);border-radius:6px;padding:16px;display:grid;gap:6px;align-content:start;min-width:0}
-  .aisle b{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:24px;line-height:1;color:var(--gold)}
-  .aisle span{font-size:15px;color:var(--cream)}
-  @media (max-width:820px){ .r1,.r2,.r3{grid-column:1/-1;grid-row:auto;aspect-ratio:4/3} .aisle{grid-template-columns:1fr 1fr} }
-  @media (max-width:440px){ .aisle{grid-template-columns:1fr} }
+  /* PLATS : ardoise */
+  .board{background:var(--clove);border-radius:6px;padding:clamp(20px,4vw,48px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,56px)}
+  .board h3{font-size:clamp(28px,3vw,38px);color:var(--gold);margin-bottom:10px}
+  .board ul{list-style:none}
+  .board li{display:flex;align-items:baseline;gap:10px;padding:9px 0;font-size:18px}
+  .board li::after{content:"";flex:1;border-bottom:2px dotted var(--cardamom);order:1}
+  .board li span{order:2;font-size:13px;color:var(--cream-soft);white-space:nowrap}
+  .board .foot{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;border-top:2px dotted var(--saffron);padding-top:20px;font-size:16px}
+  @media (max-width:720px){ .board{grid-template-columns:1fr} }
 
-  /* PLATS */
-  .plats{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
-  .menu{background:var(--spice);border-radius:6px;padding:clamp(18px,3vw,28px);display:grid;gap:14px;align-content:start}
-  .menu h3{font-size:clamp(32px,4vw,46px);line-height:.95;color:var(--gold)}
-  .menu ul{list-style:none;display:grid}
-  .menu li{padding:10px 0;border-bottom:2px dotted var(--cardamom);font-size:18px}
-  .menu li:last-child{border-bottom:0}
-  @media (max-width:720px){ .plats{grid-template-columns:1fr} }
+  /* SERVICES : liste-affiche */
+  .svc{list-style:none;border-top:2px dotted var(--gold)}
+  .svc li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px 32px;align-items:baseline;padding:18px 0;border-bottom:2px dotted var(--gold)}
+  .svc b{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(34px,5vw,68px);line-height:.95}
+  .svc span{font-size:17px;color:var(--cream)}
+  @media (max-width:640px){ .svc li{grid-template-columns:1fr} }
 
-  /* SERVICES */
-  .services{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-  .svc{border:2px dotted var(--gold);border-radius:6px;padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
-  .svc svg{width:34px;height:34px;color:var(--gold)}
-  .svc b{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:26px;line-height:1}
-  .svc span{font-size:15px;color:var(--cream-soft)}
-  @media (max-width:900px){ .services{grid-template-columns:1fr 1fr} }
-  @media (max-width:440px){ .services{grid-template-columns:1fr} }
+  /* SEMAINE + CONTACT */
+  .week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-bottom:28px}
+  .week div{background:var(--spice);border-radius:6px;padding:14px 8px;text-align:center;display:grid;gap:6px}
+  .week b{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:20px}
+  .week span{font-size:14px;font-variant-numeric:tabular-nums;color:var(--cream-soft)}
+  .week .today{background:var(--gold);color:var(--clove)}
+  .week .today span{color:var(--clove)}
+  @media (max-width:640px){ .week{grid-template-columns:repeat(4,minmax(0,1fr))} }
+  .visit{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,3vw,40px)}
+  .visit > div{display:grid;gap:10px;align-content:start;min-width:0}
+  .visit .big{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(30px,3.4vw,46px);line-height:1}
+  .visit .big.num{color:var(--gold);font-variant-numeric:tabular-nums;user-select:all}
+  .visit p{font-size:16px;color:var(--cream-soft)}
+  .visit .ctas{display:flex;gap:10px;flex-wrap:wrap}
+  .stars{color:var(--gold);letter-spacing:2px;font-size:22px}
+  @media (max-width:820px){ .visit{grid-template-columns:1fr} }
 
-  /* AVIS */
-  .avis{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(24px,6vw,96px);align-items:center}
-  .score{font-family:var(--display);font-weight:700;font-size:clamp(110px,18vw,220px);line-height:.8;color:var(--gold);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-  .score small{font-size:.3em;color:var(--cream)}
-  .stars{display:flex;gap:4px;margin:14px 0 6px}
-  .stars svg{width:26px;height:26px;fill:var(--gold)}
-  .avis .quote{display:grid;gap:20px}
-  .avis .quote p{font-size:clamp(22px,2.8vw,34px);line-height:1.2;max-width:28ch}
-  @media (max-width:720px){ .avis{grid-template-columns:1fr} }
-
-  /* INFOS */
-  .infos{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,56px)}
-  .addr{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(36px,5vw,64px);line-height:.92;margin-bottom:24px}
-  .addr span{color:var(--gold)}
-  table.hours{width:100%;border-collapse:collapse;font-size:17px;font-variant-numeric:tabular-nums}
-  .hours td{padding:10px 0;border-bottom:2px dotted var(--cardamom)}
-  .hours td:last-child{text-align:right}
-  .hours tr.today td{color:var(--gold);font-weight:600}
-  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-  .tag{border:2px solid var(--saffron);border-radius:9999px;padding:6px 14px;font-size:14px}
-  .contact{display:grid;gap:16px;align-content:start}
-  .tel{background:var(--clove);border-radius:6px;padding:22px;display:grid;gap:12px}
-  .tel b{font-family:var(--display);font-weight:700;font-size:clamp(40px,6vw,64px);line-height:1;color:var(--gold);font-variant-numeric:tabular-nums;user-select:all}
-  .tel span{font-size:15px;color:var(--cream-soft)}
-  @media (max-width:820px){ .infos{grid-template-columns:1fr} }
-
-  footer{background:var(--clove);padding-block:28px calc(96px + env(safe-area-inset-bottom,0px))}
-  footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;font-size:14px;color:var(--cream-soft)}
+  footer{background:var(--clove);padding-block:24px calc(96px + env(safe-area-inset-bottom,0px))}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between;font-size:14px;color:var(--cream-soft)}
   footer b{font-family:var(--display);text-transform:uppercase;font-size:20px;color:var(--cream);letter-spacing:.02em}
 </style>
 </head>
 <body>
 
-<nav class="nav" aria-label="Navigation principale">
+<div class="strip">
   <div class="wrap">
-    <a href="#top" class="brand">La Table <b>du Grand Marché</b></a>
-    <ul>
-      <li><a href="#commander">Click &amp; collect</a></li>
-      <li><a href="#rayons">Rayons</a></li>
-      <li><a href="#plats">Plats</a></li>
-      <li><a href="#infos">Horaires</a></li>
-      <li><a class="pill" href="#commander">Commander</a></li>
-    </ul>
-  </div>
-</nav>
-
-<header class="hero wrap" id="top">
-  <div class="kicker">
-    <span class="lbl">Épicerie afro exotique · Empalot, Toulouse</span>
-    <span class="open" id="openState"><i></i><span>Ouvert 7j/7</span></span>
-  </div>
-  <h1>La Table <em>du Grand Marché</em></h1>
-  <div class="hero-grid">
-    <div class="hero-copy">
-      <p class="lead">Les saveurs d'Afrique près de chez vous. Attiéké, placali, igname, poisson fumé, huile rouge : <b>commandez sur WhatsApp</b>, on vous met tout de côté pour l'heure que vous choisissez.</p>
-      <div class="ctas">
-        <a class="pill" href="#commander">Préparer ma commande</a>
-        <a class="ghost" href="https://wa.me/33753513533" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3 1 2.5c.1.2 1.6 2.5 4 3.5 1.5.6 2 .7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.1-.1Z"/></svg>
-          WhatsApp
-        </a>
-      </div>
-      <div class="facts">
-        <div class="fact"><span>Google</span><b>★ 4,9 / 5</b></div>
-        <div class="fact"><span>Lun – sam</span><b>10h – 20h</b></div>
-        <div class="fact"><span>Dimanche</span><b>11h – 17h</b></div>
-      </div>
+    <div class="l">
+      <span class="state" id="state"><i></i><span>Ouvert</span></span>
+      <span>6 allée Henri Sellier · Empalot, Toulouse</span>
     </div>
-    <figure>
-      <img src="images/facade.jpg" alt="Façade de La Table du Grand Marché, enseigne Épicerie afro exotique au 6 allée Henri Sellier à Toulouse" fetchpriority="high">
-      <figcaption>6 allée Henri Sellier</figcaption>
-    </figure>
+    <a href="tel:+33753513533">07 53 51 35 33</a>
+  </div>
+</div>
+
+<header class="poster wrap" id="top">
+  <p class="eyebrow">Épicerie afro exotique · Alimentation générale</p>
+  <h1>La Table <span>du Grand Marché</span></h1>
+  <p class="tag">Les saveurs d'Afrique, près de chez vous</p>
+  <div class="ctas">
+    <a class="pill" href="#liste">Faire ma liste de courses</a>
+    <a class="ghost" href="#plats">Plats à emporter</a>
+  </div>
+  <div class="band">
+    <figure><img src="images/facade.jpg" alt="Façade de La Table du Grand Marché, enseigne Épicerie afro exotique au 6 allée Henri Sellier" fetchpriority="high"><figcaption>La boutique</figcaption></figure>
+    <figure><img src="images/rayon-epicerie.jpg" alt="Rayon épicerie : fufu de banane plantain, pâte d'arachide, concentré de tomate, farines et huiles"><figcaption>Épicerie</figcaption></figure>
+    <figure><img src="images/ustensiles.jpg" alt="Mortiers et pilons en bois, canaris, marmites en aluminium, éponges filet" style="object-position:30% 50%"><figcaption>Cuisine</figcaption></figure>
+    <figure><img src="images/arachides.jpg" alt="Arachides grillées et caramélisées en bouteille, croquettes sucrées" style="object-position:45% 50%"><figcaption>Arachides</figcaption></figure>
   </div>
 </header>
 
-<div class="ticker" aria-hidden="true"><div>
-  <span>Attiéké</span><b>✦</b><span>Placali</span><b>✦</b><span>Igname kponan</span><b>✦</b><span>Poisson fumé</span><b>✦</b><span>Huile rouge</span><b>✦</b><span>Graine de palme</span><b>✦</b><span>Gombo râpé</span><b>✦</b><span>Bobolo</span><b>✦</b><span>Alloco</span><b>✦</b>
-  <span>Attiéké</span><b>✦</b><span>Placali</span><b>✦</b><span>Igname kponan</span><b>✦</b><span>Poisson fumé</span><b>✦</b><span>Huile rouge</span><b>✦</b><span>Graine de palme</span><b>✦</b><span>Gombo râpé</span><b>✦</b><span>Bobolo</span><b>✦</b><span>Alloco</span><b>✦</b>
-</div></div>
-
 <main>
-  <section id="commander">
+  <section id="liste">
     <div class="wrap">
-      <div class="head">
-        <p class="lbl">Click &amp; collect</p>
-        <h2>Vous choisissez,<br>on met de côté</h2>
-        <p>Ajoutez vos produits, choisissez le jour et l'heure. La commande part sur notre WhatsApp, on la prépare et vous payez sur place en venant la chercher.</p>
+      <div class="sec-title">
+        <h2>Votre liste,<br>on la met de côté</h2>
+        <p>Choisissez vos produits, puis le jour et l'heure sur le bon de retrait, et envoyez-le sur notre WhatsApp. Vous payez sur place en venant chercher.</p>
       </div>
-      <ol class="steps">
-        <li>Ajoutez vos produits au panier</li>
-        <li>Choisissez le jour et l'heure de retrait</li>
-        <li>Envoyez sur WhatsApp, on vous confirme</li>
-      </ol>
-      <div class="cats" id="cats" role="tablist" aria-label="Catégories"></div>
-      <div class="grid" id="grid"></div>
-      <p class="note">Une sélection de ce qu'on a en rayon. Il vous manque un produit ? Écrivez-le dans la remarque, on regarde s'il est en stock. Prix confirmés au retrait.</p>
-    </div>
-  </section>
-
-  <hr class="rule">
-
-  <section id="rayons">
-    <div class="wrap">
-      <div class="head">
-        <p class="lbl">Les rayons</p>
-        <h2>Tout pour<br>cuisiner comme au pays</h2>
-      </div>
-      <div class="rayons">
-        <figure class="r1"><img src="images/rayon-epicerie.jpg" alt="Rayon épicerie : fufu de banane plantain, pâte d'arachide, concentré de tomate, farines et huiles" loading="lazy"><figcaption>L'épicerie</figcaption></figure>
-        <figure class="r2"><img src="images/arachides.jpg" alt="Arachides grillées et caramélisées en bouteille, croquettes sucrées et noix en sachet" loading="lazy"><figcaption>Arachides &amp; croquettes</figcaption></figure>
-        <figure class="r3"><img src="images/ustensiles.jpg" alt="Mortiers et pilons en bois, canaris, marmites en aluminium, éponges filet et plantes séchées" loading="lazy"><figcaption>Cuisine &amp; ustensiles</figcaption></figure>
-        <div class="aisle">
-          <div><b>Féculents</b><span>Attiéké, placali, foutou, dorkounou, bobolo, poudre de maïs.</span></div>
-          <div><b>Frais</b><span>Igname kponan, manioc, banane plantain, gombo.</span></div>
-          <div><b>Sauces &amp; huiles</b><span>Huile rouge, graine de palme, pâte d'arachide, akpi, gingembre.</span></div>
-          <div><b>Fumé &amp; séché</b><span>Poisson fumé, écrevisses, crabe, adjovan.</span></div>
+      <div class="shop">
+        <div>
+          <nav class="jump" id="jump" aria-label="Rayons"></nav>
+          <div id="aisles"></div>
+          <p class="miss">Il vous manque quelque chose ? Écrivez-le dans la remarque du bon, on regarde s'il est en rayon. Prix confirmés au retrait.</p>
         </div>
+
+        <aside class="ticket" id="ticket" aria-label="Bon de retrait">
+          <p class="sub">La Table du Grand Marché</p>
+          <h3>Bon de retrait</h3>
+          <ul class="tl" id="tl"></ul>
+          <div>
+            <p class="lab">Jour</p>
+            <div class="chips" id="days"></div>
+          </div>
+          <div>
+            <p class="lab">Heure</p>
+            <div class="chips" id="slots"></div>
+          </div>
+          <div class="fields">
+            <label for="f-name">Prénom<input id="f-name" autocomplete="given-name"></label>
+            <label for="f-phone">Téléphone<input id="f-phone" type="tel" autocomplete="tel"></label>
+            <label class="full" for="f-note">Remarque<textarea id="f-note" placeholder="Igname bien ferme, accompagnement du plat, autre produit…"></textarea></label>
+          </div>
+          <a class="pill send" id="send" href="https://wa.me/33753513533" target="_blank" rel="noopener" aria-disabled="true">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3 1 2.5c.1.2 1.6 2.5 4 3.5 1.500.6 2 .7 2.8.6.4-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.1-.1Z"/></svg>
+            Envoyer sur WhatsApp
+          </a>
+          <p class="why" id="why">Ajoutez au moins un produit pour commencer.</p>
+          <button class="clear" type="button" id="clear" hidden>Vider le bon</button>
+        </aside>
       </div>
     </div>
   </section>
 
-  <hr class="rule">
+  <div class="wrap"><hr class="dots"></div>
 
   <section id="plats">
     <div class="wrap">
-      <div class="head">
-        <p class="lbl">Plats à emporter</p>
+      <div class="sec-title">
         <h2>Comme à la maison,<br>mais à emporter</h2>
-        <p>Des plats préparés chez nous. Réservez-les avec votre commande pour qu'ils soient prêts à votre arrivée.</p>
+        <p>Des plats préparés chez nous. Ajoutez-les à votre liste pour qu'ils soient prêts à votre arrivée.</p>
       </div>
-      <div class="plats">
-        <div class="menu">
+      <div class="board">
+        <div>
           <h3>Nos sauces</h3>
           <ul>
             <li>Sauce graine</li><li>Sauce gombo</li><li>Sauce arachide</li><li>Sauce claire</li><li>Croupion de dinde</li><li>Sauce tomate</li><li>Soupe</li>
           </ul>
         </div>
-        <div class="menu">
+        <div>
           <h3>Nos accompagnements</h3>
           <ul>
-            <li>Placali · Foutou · Riz</li><li>Attiéké poisson ou poulet frit</li><li>Dorkounou, croupion de dinde et poisson</li><li>Alloco · Frites</li><li>Gésier de poulet sauté</li><li>Petit plat petit prix</li>
+            <li>Placali · Foutou · Riz</li><li>Attiéké poisson<span>ou poulet frit</span></li><li>Dorkounou<span>croupion, poisson</span></li><li>Alloco · Frites</li><li>Gésier de poulet sauté</li><li>Petit plat petit prix</li>
           </ul>
         </div>
+        <div class="foot">
+          <span>Prix et plats du jour au magasin.</span>
+          <a class="pill" href="#a-plats">Réserver un plat</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <hr class="rule">
-
-  <section>
+  <section id="services" style="padding-top:0">
     <div class="wrap">
-      <div class="head">
-        <p class="lbl">Aussi chez nous</p>
-        <h2>Plus qu'une épicerie</h2>
-      </div>
-      <div class="services">
-        <div class="svc">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 11h18M5 11a7 7 0 0 0 14 0M8 21h8M12 18v3M9 4c0 1.5 1 1.5 1 3M13 3c0 1.5 1 1.5 1 3"/></svg>
-          <b>Plats à emporter</b><span>Sauces et accompagnements préparés sur place.</span>
-        </div>
-        <div class="svc">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7Z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg>
-          <b>Envoi de colis</b><span>Déposez vos colis à envoyer, on s'occupe de l'expédition.</span>
-        </div>
-        <div class="svc">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M4 9h16M4 14h16M9 4v16M14 4v16"/></svg>
-          <b>Tissus afro</b><span>Pagnes et tissus wax à la vente en magasin.</span>
-        </div>
-        <div class="svc">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
-          <b>Relais colis</b><span>Point Relais Pickup La Poste : retirez vos colis ici.</span>
-        </div>
-      </div>
+      <p class="eyebrow" style="margin-bottom:16px">Aussi chez nous</p>
+      <ul class="svc">
+        <li><b>Envoi de colis</b><span>Déposez vos colis à expédier, on s'occupe de l'envoi.</span></li>
+        <li><b>Tissus afro</b><span>Pagnes et tissus wax à la vente en boutique.</span></li>
+        <li><b>Relais Pickup</b><span>Point relais La Poste : retirez vos colis ici.</span></li>
+      </ul>
     </div>
   </section>
 
-  <hr class="rule">
-
-  <section id="avis">
-    <div class="wrap avis">
-      <div>
-        <p class="score">4,9<small> /5</small></p>
-        <div class="stars" aria-label="4,9 étoiles sur 5">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18.3 5.5 22l1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18.3 5.5 22l1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18.3 5.5 22l1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18.3 5.5 22l1.7-7.4-5.7-5 7.5-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18.3 5.5 22l1.7-7.4-5.7-5 7.5-.7z"/></svg>
-        </div>
-        <p class="lbl">19 avis Google</p>
+  <section id="infos" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-title"><h2>Passer nous voir</h2></div>
+      <div class="week" id="week">
+        <div data-d="1"><b>Lun</b><span>10h–20h</span></div>
+        <div data-d="2"><b>Mar</b><span>10h–20h</span></div>
+        <div data-d="3"><b>Mer</b><span>10h–20h</span></div>
+        <div data-d="4"><b>Jeu</b><span>10h–20h</span></div>
+        <div data-d="5"><b>Ven</b><span>10h–20h</span></div>
+        <div data-d="6"><b>Sam</b><span>10h–20h</span></div>
+        <div data-d="0"><b>Dim</b><span>11h–17h</span></div>
       </div>
-      <div class="quote">
-        <p>Nos clients nous notent 4,9 sur 5 sur Google. Merci à eux, et à vous de venir goûter.</p>
-        <div class="ctas"><a class="ghost" href="https://www.google.com/maps/place/?q=place_id:ChIJPyNa7a7seKkRj0d5lOGnCxw" target="_blank" rel="noopener">Lire les avis sur Google</a></div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="rule">
-
-  <section id="infos">
-    <div class="wrap infos">
-      <div>
-        <p class="lbl" style="margin-bottom:18px">Infos pratiques</p>
-        <p class="addr">6 allée Henri Sellier<br><span>31400 Toulouse · Empalot</span></p>
-        <table class="hours" aria-label="Horaires d'ouverture">
-          <tbody id="hours">
-            <tr data-d="1"><td>Lundi</td><td>10h00 – 20h00</td></tr>
-            <tr data-d="2"><td>Mardi</td><td>10h00 – 20h00</td></tr>
-            <tr data-d="3"><td>Mercredi</td><td>10h00 – 20h00</td></tr>
-            <tr data-d="4"><td>Jeudi</td><td>10h00 – 20h00</td></tr>
-            <tr data-d="5"><td>Vendredi</td><td>10h00 – 20h00</td></tr>
-            <tr data-d="6"><td>Samedi</td><td>10h00 – 20h00</td></tr>
-            <tr data-d="0"><td>Dimanche</td><td>11h00 – 17h00</td></tr>
-          </tbody>
-        </table>
-        <div class="tags">
-          <span class="tag">Métro B · Empalot</span>
-          <span class="tag">Click &amp; collect WhatsApp</span>
-          <span class="tag">Relais Pickup</span>
+      <div class="visit">
+        <div>
+          <p class="eyebrow">Adresse</p>
+          <p class="big">6 allée Henri Sellier<br>31400 Toulouse</p>
+          <p>Quartier Empalot, métro B Empalot.</p>
+          <div class="ctas"><a class="ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=43.5770485,1.4420498&amp;destination_place_id=ChIJPyNa7a7seKkRj0d5lOGnCxw" target="_blank" rel="noopener">Itinéraire</a></div>
         </div>
-      </div>
-      <div class="contact">
-        <div class="tel">
-          <span>Téléphone et WhatsApp</span>
-          <b>07 53 51 35 33</b>
-          <div class="ctas">
-            <a class="pill" href="tel:+33753513533">Appeler</a>
-            <a class="ghost" href="https://wa.me/33753513533" target="_blank" rel="noopener">WhatsApp</a>
-          </div>
+        <div>
+          <p class="eyebrow">Téléphone · WhatsApp</p>
+          <p class="big num">07 53 51 35 33</p>
+          <p>Appelez ou écrivez-nous pour une question ou un produit.</p>
+          <div class="ctas"><a class="pill" href="tel:+33753513533">Appeler</a><a class="ghost" href="https://wa.me/33753513533" target="_blank" rel="noopener">WhatsApp</a></div>
         </div>
-        <div class="ctas">
-          <a class="ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=43.5770485,1.4420498&amp;destination_place_id=ChIJPyNa7a7seKkRj0d5lOGnCxw" target="_blank" rel="noopener">Itinéraire Google Maps</a>
+        <div>
+          <p class="eyebrow">Avis Google</p>
+          <p class="big num">4,9 / 5</p>
+          <p><span class="stars" aria-hidden="true">★★★★★</span><br>19 avis clients sur Google.</p>
+          <div class="ctas"><a class="ghost" href="https://www.google.com/maps/place/?q=place_id:ChIJPyNa7a7seKkRj0d5lOGnCxw" target="_blank" rel="noopener">Lire les avis</a></div>
         </div>
       </div>
     </div>
@@ -441,183 +345,129 @@
 <footer>
   <div class="wrap">
     <b>La Table du Grand Marché</b>
-    <span>Épicerie afro exotique · 6 allée Henri Sellier, 31400 Toulouse · 07 53 51 35 33</span>
+    <span>Épicerie afro exotique · 6 allée Henri Sellier, 31400 Toulouse</span>
     <span>Photos : La Table du Grand Marché</span>
   </div>
 </footer>
 
-<button class="cartbtn" id="cartBtn" aria-controls="cart" aria-expanded="false">Ma commande <i id="cartCount">0</i></button>
-
-<div class="cart" id="cart" hidden>
-  <aside class="panel" aria-label="Votre commande">
-    <div class="panel-head"><h3>Ma commande</h3><button class="x" id="cartClose">Fermer</button></div>
-    <ul class="lines" id="lines"></ul>
-    <p class="empty" id="empty">Votre panier est vide. Ajoutez des produits depuis le catalogue.</p>
-    <form id="checkout" class="checkout" novalidate>
-      <label for="f-name">Prénom<input id="f-name" name="name" required autocomplete="given-name"></label>
-      <label for="f-phone">Téléphone<input id="f-phone" name="phone" type="tel" required autocomplete="tel"></label>
-      <div class="two">
-        <label for="day">Jour de retrait<select name="day" id="day" required></select></label>
-        <label for="slot">Heure<select name="slot" id="slot" required></select></label>
-      </div>
-      <label for="f-note">Remarque (facultatif)<textarea id="f-note" name="note" placeholder="Igname bien ferme, accompagnement du plat, autre produit…"></textarea></label>
-      <p class="fine" id="formErr" hidden></p>
-      <button class="pill" type="submit">Préparer le message WhatsApp</button>
-      <p class="fine">Paiement sur place au retrait. On vous confirme la commande sur WhatsApp.</p>
-    </form>
-    <div class="done" id="done" hidden role="status" aria-live="polite">
-      <p class="lbl">Votre message est prêt</p>
-      <pre id="msg"></pre>
-      <div class="row">
-        <a class="pill" id="waLink" href="https://wa.me/33753513533" target="_blank" rel="noopener">Envoyer sur WhatsApp</a>
-        <button class="ghost" type="button" id="editBtn">Modifier</button>
-      </div>
-      <p class="fine">Le panier se vide une fois le message ouvert dans WhatsApp. Pas de WhatsApp ? Appelez le 07 53 51 35 33.</p>
-    </div>
-  </aside>
-</div>
+<div class="mbar" id="mbar"><a class="pill" href="#ticket" id="mbarLink">Mon bon de retrait</a></div>
 
 <script>
 (function(){
   var WA='33753513533';
-  // heure de Paris
   var now=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Paris'}));
   var d=now.getDay(), m=now.getHours()*60+now.getMinutes();
   var H=function(dow){return dow===0?{o:11*60,c:17*60}:{o:10*60,c:20*60}};
   var hm=function(t){return Math.floor(t/60)+'h'+String(t%60).padStart(2,'0')};
-  var row=document.querySelector('#hours tr[data-d="'+d+'"]'); if(row) row.classList.add('today');
-  var st=document.getElementById('openState'), h=H(d), isOpen=m>=h.o&&m<h.c;
-  st.querySelector('span').textContent=isOpen?'Ouvert · ferme à '+hm(h.c):(m<h.o?'Fermé · ouvre à '+hm(h.o):'Fermé · ouvre demain à '+hm(H((d+1)%7).o));
+  var td=document.querySelector('#week [data-d="'+d+'"]'); if(td) td.classList.add('today');
+  var st=document.getElementById('state'), h=H(d), isOpen=m>=h.o&&m<h.c;
+  st.querySelector('span').textContent=isOpen?'Ouvert jusqu’à '+hm(h.c):(m<h.o?'Fermé · ouvre à '+hm(h.o):'Fermé · ouvre demain à '+hm(H((d+1)%7).o));
   if(!isOpen) st.classList.add('closed');
 
-  // ---- catalogue (sélection d'après les vitrines et les rayons du magasin) ----
-  var P=[
-    ['attieke','Féculents','Attiéké','Semoule de manioc'],
-    ['placali','Féculents','Placali','Pâte de manioc'],
-    ['fufu','Féculents','Foutou / fufu plantain','Préparation en boîte','p-fufu'],
-    ['dorkounou','Féculents','Dorkounou','Précuit ou à cuire'],
-    ['mais','Féculents','Poudre de maïs','Jaune ou blanche'],
-    ['bobolo','Féculents','Bobolo','Bâton de manioc'],
-    ['igname','Frais','Igname kponan','Au kilo'],
-    ['manioc','Frais','Manioc','Au kilo'],
-    ['plantain','Frais','Banane plantain','Mûre ou verte'],
-    ['gombo','Frais','Gombo râpé','Prêt pour la sauce'],
-    ['huile-rouge','Sauces & huiles','Huile rouge','Huile de palme'],
-    ['graine','Sauces & huiles','Graine de palme','Pour la sauce graine'],
-    ['pate-arachide','Sauces & huiles','Pâte d’arachide','Pot, plusieurs marques','p-pate-arachide'],
-    ['tomate','Sauces & huiles','Concentré de tomate','Boîtes de toutes tailles','p-tomate'],
-    ['huiles','Sauces & huiles','Huiles de cuisine','Plusieurs formats','p-huile'],
-    ['gingembre','Sauces & huiles','Pâte de gingembre','En pot'],
-    ['akpi','Sauces & huiles','Akpi','Épice pour les sauces'],
-    ['moringa','Sauces & huiles','Feuilles de moringa','Séchées, en sachet','p-plantes'],
-    ['poisson-fume','Fumé & séché','Poisson fumé','Pour sauces et soupes'],
-    ['ecrevisses','Fumé & séché','Écrevisses','Séchées'],
-    ['crabe','Fumé & séché','Crabe','Pour la sauce'],
-    ['adjovan','Fumé & séché','Adjovan','Poisson fermenté'],
-    ['arachide-grillee','Grignotage','Arachides grillées','Bouteille 250 g','p-arachide-grillee','2,99 €'],
-    ['arachide-caramel','Grignotage','Arachides caramélisées','Bouteille 250 g','p-arachide-caramel','3,30 €'],
-    ['croquettes','Grignotage','Croquettes sucrées','Petit pot','p-croquettes','2,70 €'],
-    ['mortier','Cuisine','Mortier et pilon','En bois','p-mortier'],
-    ['marmite','Cuisine','Marmite','En aluminium','p-marmite'],
-    ['eponge','Cuisine','Éponge filet','Plusieurs couleurs','p-eponge'],
-    ['p-attieke-poisson','Plats à emporter','Attiéké poisson','Plat préparé'],
-    ['p-attieke-poulet','Plats à emporter','Attiéké poulet frit','Plat préparé'],
-    ['p-alloco','Plats à emporter','Alloco','Banane plantain frite'],
-    ['p-gesier','Plats à emporter','Gésier de poulet sauté','Plat préparé'],
-    ['p-sauce-graine','Plats à emporter','Sauce graine','Accompagnement au choix'],
-    ['p-sauce-arachide','Plats à emporter','Sauce arachide','Accompagnement au choix'],
-    ['p-sauce-gombo','Plats à emporter','Sauce gombo','Accompagnement au choix'],
-    ['p-sauce-claire','Plats à emporter','Sauce claire','Accompagnement au choix']
-  ].map(function(a){return {id:a[0],cat:a[1],name:a[2],d:a[3],img:a[4]?'images/'+a[4]+'.jpg':null,price:a[5]||null}});
+  // ---- rayons (sélection d'après les vitrines et les étagères du magasin) ----
+  var A=[
+    ['feculents','Féculents','attiéké, foutou…',[
+      ['attieke','Attiéké','Semoule de manioc'],['placali','Placali','Pâte de manioc'],
+      ['fufu','Foutou / fufu plantain','Préparation en boîte','p-fufu'],['dorkounou','Dorkounou','Précuit ou à cuire'],
+      ['mais','Poudre de maïs','Jaune ou blanche'],['bobolo','Bobolo','Bâton de manioc']]],
+    ['frais','Frais','tubercules et légumes',[
+      ['igname','Igname kponan','Au kilo'],['manioc','Manioc','Au kilo'],['plantain','Banane plantain','Mûre ou verte'],['gombo','Gombo râpé','Prêt pour la sauce']]],
+    ['sauces','Sauces & huiles','pour la marmite',[
+      ['huile-rouge','Huile rouge','Huile de palme'],['graine','Graine de palme','Pour la sauce graine'],
+      ['pate-arachide','Pâte d’arachide','En pot','p-pate-arachide'],['tomate','Concentré de tomate','Boîtes de toutes tailles','p-tomate'],
+      ['huiles','Huiles de cuisine','Plusieurs formats','p-huile'],['gingembre','Pâte de gingembre','En pot'],
+      ['akpi','Akpi','Épice pour les sauces'],['moringa','Feuilles de moringa','Séchées, en sachet','p-plantes']]],
+    ['fume','Fumé & séché','poissons et fruits de mer',[
+      ['poisson-fume','Poisson fumé','Pour sauces et soupes'],['ecrevisses','Écrevisses','Séchées'],['crabe','Crabe','Pour la sauce'],['adjovan','Adjovan','Poisson fermenté']]],
+    ['grignotage','Grignotage','arachides et douceurs',[
+      ['arachide-grillee','Arachides grillées','Bouteille 250 g','p-arachide-grillee','2,99 €'],
+      ['arachide-caramel','Arachides caramélisées','Bouteille 250 g','p-arachide-caramel','3,30 €'],
+      ['croquettes','Croquettes sucrées','Petit pot','p-croquettes','2,70 €']]],
+    ['cuisine','Cuisine','ustensiles',[
+      ['mortier','Mortier et pilon','En bois','p-mortier'],['marmite','Marmite','En aluminium','p-marmite'],['eponge','Éponge filet','Plusieurs couleurs','p-eponge']]],
+    ['plats','Plats à emporter','préparés chez nous',[
+      ['pl-attieke-poisson','Attiéké poisson','Plat préparé'],['pl-attieke-poulet','Attiéké poulet frit','Plat préparé'],
+      ['pl-alloco','Alloco','Banane plantain frite'],['pl-gesier','Gésier de poulet sauté','Plat préparé'],
+      ['pl-graine','Sauce graine','Accompagnement au choix'],['pl-arachide','Sauce arachide','Accompagnement au choix'],
+      ['pl-gombo','Sauce gombo','Accompagnement au choix'],['pl-claire','Sauce claire','Accompagnement au choix']]]
+  ];
+  var P={}; A.forEach(function(a){a[3].forEach(function(p){P[p[0]]={name:p[1],d:p[2],img:p[3]?'images/'+p[3]+'.jpg':null,price:p[4]||null}})});
 
-  var cart={}; try{cart=JSON.parse(localStorage.getItem('tgm-cart'))||{}}catch(e){}
-  Object.keys(cart).forEach(function(id){if(!P.some(function(p){return p.id===id})) delete cart[id]});
-  var save=function(){try{localStorage.setItem('tgm-cart',JSON.stringify(cart))}catch(e){}};
-  var cats=['Tout'].concat(P.map(function(p){return p.cat}).filter(function(c,i,a){return a.indexOf(c)===i}));
-  var cur='Tout';
-  var catsEl=document.getElementById('cats'), grid=document.getElementById('grid');
-  function renderCats(){
-    catsEl.innerHTML='';
-    cats.forEach(function(c){var b=document.createElement('button');b.type='button';b.textContent=c;b.setAttribute('role','tab');b.setAttribute('aria-selected',c===cur);b.onclick=function(){cur=c;renderCats();renderGrid()};catsEl.appendChild(b)});
-  }
-  function renderGrid(){
-    grid.innerHTML='';
-    P.filter(function(p){return cur==='Tout'||p.cat===cur}).forEach(function(p){
-      var q=cart[p.id]||0, el=document.createElement('article'); el.className='prod';
-      el.innerHTML='<div class="pic"></div><h3></h3><p class="d"></p><span class="price"></span><div class="act"></div>';
-      var pic=el.querySelector('.pic');
-      if(p.img){var im=new Image();im.src=p.img;im.alt=p.name;im.loading='lazy';pic.appendChild(im)}
-      else{pic.classList.add('none');var s=document.createElement('span');s.textContent=p.name;pic.appendChild(s)}
-      el.querySelector('h3').textContent=p.name; el.querySelector('.d').textContent=p.d;
-      var pr=el.querySelector('.price');
-      if(p.price){pr.textContent=p.price;pr.classList.add('real')} else pr.textContent=p.cat==='Plats à emporter'?'Prix au magasin':'Prix en rayon';
-      var act=el.querySelector('.act');
-      if(q){
-        act.innerHTML='<div class="qty"><button type="button" aria-label="Retirer un">−</button><span></span><button type="button" aria-label="Ajouter un">+</button></div>';
-        act.querySelector('span').textContent=q;
-        var bs=act.querySelectorAll('button'); bs[0].onclick=function(){setQ(p.id,q-1)}; bs[1].onclick=function(){setQ(p.id,q+1)};
-      } else {
-        var b=document.createElement('button'); b.type='button'; b.className='add'; b.textContent='Ajouter'; b.onclick=function(){setQ(p.id,1)}; act.appendChild(b);
-      }
-      grid.appendChild(el);
+  var cart={}; try{cart=JSON.parse(localStorage.getItem('tgm-liste'))||{}}catch(e){}
+  Object.keys(cart).forEach(function(id){if(!P[id]) delete cart[id]});
+  var save=function(){try{localStorage.setItem('tgm-liste',JSON.stringify(cart))}catch(e){}};
+
+  var jump=document.getElementById('jump'), aisles=document.getElementById('aisles');
+  A.forEach(function(a){
+    var j=document.createElement('a'); j.href='#a-'+a[0]; j.textContent=a[1]; jump.appendChild(j);
+    var sec=document.createElement('div'); sec.className='aisle'; sec.id='a-'+a[0];
+    sec.innerHTML='<h3></h3><ul class="rows"></ul>';
+    var h3=sec.querySelector('h3'); h3.textContent=a[1]; var sm=document.createElement('small'); sm.textContent=a[2]; h3.appendChild(sm);
+    var ul=sec.querySelector('ul');
+    a[3].forEach(function(p){
+      var id=p[0], it=P[id], li=document.createElement('li'); li.dataset.id=id;
+      li.innerHTML='<span class="th"></span><span class="n"><b></b><span></span></span><span class="step"><button type="button" class="minus">−</button><output>0</output><button type="button" class="plus">+</button></span>';
+      var th=li.querySelector('.th');
+      if(it.img){var im=new Image();im.src=it.img;im.alt='';im.loading='lazy';th.appendChild(im)} else th.textContent=it.name.charAt(0);
+      li.querySelector('b').textContent=it.name;
+      var sp=li.querySelector('.n > span'); sp.textContent=it.d;
+      if(it.price){var em=document.createElement('em');em.textContent=it.price;sp.appendChild(em)}
+      li.querySelector('.minus').setAttribute('aria-label','Retirer '+it.name);
+      li.querySelector('.plus').setAttribute('aria-label','Ajouter '+it.name);
+      li.querySelector('.minus').onclick=function(){setQ(id,(cart[id]||0)-1)};
+      li.querySelector('.plus').onclick=function(){setQ(id,(cart[id]||0)+1)};
+      ul.appendChild(li);
     });
-  }
-  function setQ(id,q){ if(q<=0) delete cart[id]; else cart[id]=q; save(); renderGrid(); renderCart(); }
-  var count=function(){return Object.keys(cart).reduce(function(s,k){return s+cart[k]},0)};
-  var cartEl=document.getElementById('cart'), cartBtn=document.getElementById('cartBtn'), form=document.getElementById('checkout'), done=document.getElementById('done');
-  function renderCart(){
-    var lines=document.getElementById('lines'); lines.innerHTML='';
-    Object.keys(cart).forEach(function(id){var p=P.find(function(x){return x.id===id}); if(!p) return;
-      var li=document.createElement('li'); li.innerHTML='<span><b></b><span></span></span><button type="button">Retirer</button>';
-      li.querySelector('b').textContent=cart[id]+' ×'; li.querySelector('span span').textContent=p.name;
-      li.querySelector('button').onclick=function(){setQ(id,0)}; lines.appendChild(li);});
-    var n=count(); document.getElementById('empty').hidden=n>0; form.hidden=n===0||!done.hidden;
-    document.getElementById('cartCount').textContent=n; cartBtn.classList.toggle('on',n>0);
-  }
-  var openCart=function(o){cartEl.hidden=!o;cartBtn.setAttribute('aria-expanded',o);if(o) document.getElementById('cartClose').focus()};
-  cartBtn.onclick=function(){openCart(true)};
-  document.getElementById('cartClose').onclick=function(){openCart(false)};
-  cartEl.addEventListener('click',function(e){if(e.target===cartEl) openCart(false)});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!cartEl.hidden) openCart(false)});
+    aisles.appendChild(sec);
+  });
 
-  // jours et créneaux (7 prochains jours, toutes les 30 min, 1 h de préparation minimum)
-  var daySel=document.getElementById('day'), slotSel=document.getElementById('slot');
-  var DN=['dimanche','lundi','mardi','mercredi','jeudi','vendredi','samedi'];
+  // jours et créneaux : 7 jours, toutes les 30 min, 1 h de préparation minimum
+  var DN=['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'], days=[], dayI=0, slot=null;
   for(var i=0;i<7;i++){var dt=new Date(now);dt.setDate(now.getDate()+i);
-    var o=document.createElement('option'); o.value=i;
-    o.textContent=(i===0?"Aujourd'hui":i===1?'Demain':DN[dt.getDay()].replace(/^./,function(c){return c.toUpperCase()}))+' '+dt.getDate()+'/'+(dt.getMonth()+1);
-    o.dataset.dow=dt.getDay(); daySel.appendChild(o);}
-  function fillSlots(){
-    slotSel.innerHTML=''; var dow=+daySel.selectedOptions[0].dataset.dow, h=H(dow);
-    var start=daySel.value==='0'?Math.max(h.o+30,Math.ceil((m+60)/30)*30):h.o+30;
-    for(var t=start;t<=h.c-30;t+=30){var s=document.createElement('option');s.textContent=hm(t);slotSel.appendChild(s);}
-    if(!slotSel.options.length){var s2=document.createElement('option');s2.textContent='Plus de créneau';s2.value='';slotSel.appendChild(s2);}
+    days.push({dow:dt.getDay(),label:(i===0?"Aujourd'hui":i===1?'Demain':DN[dt.getDay()])+' '+dt.getDate()+'/'+(dt.getMonth()+1)});}
+  function slotsFor(i){var h=H(days[i].dow),s=i===0?Math.max(h.o+30,Math.ceil((m+60)/30)*30):h.o+30,out=[];for(var t=s;t<=h.c-30;t+=30)out.push(hm(t));return out}
+  if(!slotsFor(0).length) dayI=1;
+  var daysEl=document.getElementById('days'), slotsEl=document.getElementById('slots');
+  function renderDays(){
+    daysEl.innerHTML='';
+    days.forEach(function(x,i){var b=document.createElement('button');b.type='button';b.textContent=x.label;b.setAttribute('aria-pressed',i===dayI);
+      if(i===0&&!slotsFor(0).length) b.disabled=true;
+      b.onclick=function(){dayI=i;slot=null;renderDays();renderSlots();update()};daysEl.appendChild(b)});
   }
-  daySel.onchange=fillSlots; fillSlots();
-  if(!slotSel.options[0].value){daySel.value='1';fillSlots();}
+  function renderSlots(){
+    slotsEl.innerHTML=''; slotsFor(dayI).forEach(function(s){var b=document.createElement('button');b.type='button';b.textContent=s;b.setAttribute('aria-pressed',s===slot);
+      b.onclick=function(){slot=s;renderSlots();update()};slotsEl.appendChild(b)});
+  }
 
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    var f=new FormData(form), err=document.getElementById('formErr');
-    if(!String(f.get('name')).trim()||!String(f.get('phone')).trim()||!f.get('slot')){
-      err.hidden=false; err.textContent='Indiquez votre prénom, votre téléphone et une heure de retrait.'; return;
-    }
-    err.hidden=true;
-    var lines=Object.keys(cart).map(function(id){var p=P.find(function(x){return x.id===id});return p?'• '+cart[id]+' × '+p.name:''}).filter(Boolean).join('\n');
-    var msg='Bonjour La Table du Grand Marché, je souhaite une commande à retirer :\n\n'+lines+
-      '\n\nRetrait : '+daySel.selectedOptions[0].textContent+' à '+f.get('slot')+
-      '\nNom : '+String(f.get('name')).trim()+'\nTél : '+String(f.get('phone')).trim()+
-      (String(f.get('note')).trim()?'\nRemarque : '+String(f.get('note')).trim():'')+'\n\nMerci !';
-    document.getElementById('msg').textContent=msg;
-    document.getElementById('waLink').href='https://wa.me/'+WA+'?text='+encodeURIComponent(msg);
-    done.hidden=false; form.hidden=true;
-  });
-  document.getElementById('waLink').addEventListener('click',function(){
-    setTimeout(function(){cart={};save();done.hidden=true;renderGrid();renderCart();openCart(false)},800);
-  });
-  document.getElementById('editBtn').onclick=function(){done.hidden=true;renderCart()};
+  var tl=document.getElementById('tl'), send=document.getElementById('send'), why=document.getElementById('why'), clearB=document.getElementById('clear'), mbar=document.getElementById('mbar');
+  var fName=document.getElementById('f-name'), fPhone=document.getElementById('f-phone'), fNote=document.getElementById('f-note');
+  function setQ(id,q){ if(q<=0) delete cart[id]; else cart[id]=Math.min(q,99); save(); update(); }
+  function update(){
+    var n=0;
+    document.querySelectorAll('.rows li').forEach(function(li){var q=cart[li.dataset.id]||0;n+=q;
+      li.querySelector('output').textContent=q; li.querySelector('.minus').disabled=!q; li.classList.toggle('on',q>0)});
+    tl.innerHTML='';
+    var ids=Object.keys(cart);
+    if(!ids.length){var e=document.createElement('li');e.className='none';e.textContent='Votre liste est vide.';tl.appendChild(e)}
+    ids.forEach(function(id){var li=document.createElement('li');var a=document.createElement('span');a.textContent=P[id].name;var b=document.createElement('b');b.textContent='× '+cart[id];li.appendChild(a);li.appendChild(b);tl.appendChild(li)});
+    clearB.hidden=!ids.length;
+    mbar.classList.toggle('on',n>0); document.getElementById('mbarLink').textContent='Mon bon de retrait · '+n+(n>1?' articles':' article');
+    var miss=!ids.length?'Ajoutez au moins un produit pour commencer.':!slot?'Choisissez une heure de retrait.':!fName.value.trim()?'Indiquez votre prénom.':!fPhone.value.trim()?'Indiquez votre téléphone.':'';
+    why.textContent=miss||'Le message s’ouvre dans WhatsApp, prêt à envoyer.';
+    send.setAttribute('aria-disabled',miss?'true':'false');
+    if(!miss){
+      var msg='Bonjour La Table du Grand Marché, je souhaite une commande à retirer :\n\n'+
+        ids.map(function(id){return '• '+cart[id]+' × '+P[id].name}).join('\n')+
+        '\n\nRetrait : '+days[dayI].label+' à '+slot+'\nNom : '+fName.value.trim()+'\nTél : '+fPhone.value.trim()+
+        (fNote.value.trim()?'\nRemarque : '+fNote.value.trim():'')+'\n\nMerci !';
+      send.href='https://wa.me/'+WA+'?text='+encodeURIComponent(msg);
+    } else send.href='https://wa.me/'+WA;
+  }
+  [fName,fPhone,fNote].forEach(function(f){f.addEventListener('input',update)});
+  send.addEventListener('click',function(e){if(send.getAttribute('aria-disabled')==='true'){e.preventDefault();why.focus&&why.scrollIntoView({block:'nearest'})}});
+  clearB.onclick=function(){cart={};save();update()};
 
-  renderCats(); renderGrid(); renderCart();
+  renderDays(); renderSlots(); update();
 })();
 </script>
 </body>
