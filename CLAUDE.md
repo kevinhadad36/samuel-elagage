@@ -12,7 +12,7 @@ Ne pas éditer index.html ni elagage-*/ à la main : tout est généré.
 - Régénérer : `node build.mjs`
 - Domaine acheté : samuelelagage.fr (GitHub Pages, fichier CNAME) — live, HTTPS actif.
 - Numéro de suivi OVH actif depuis le 2026-10-15 : 05 31 51 11 96 (+33531511196), redirige vers le mobile de Samuel. Déjà utilisé dans le build (`PHONE=+33531511196`) — ne plus utiliser le numéro direct de Samuel sur le site.
-- Build de référence utilisé : `BASE=https://samuelelagage.fr PHONE=+33531511196 node build.mjs` puis commit + push. UMAMI_ID toujours vide (pas d'analytics configuré pour l'instant).
+- Build de référence utilisé : `BASE=https://samuelelagage.fr PHONE=+33531511196 UMAMI_ID=2dca9c6b-3124-4b42-8a64-4a566cfe36ff node build.mjs` puis commit + push. Umami actif depuis le 2026-10-15 (site "Samuel Élagage" sur cloud.umami.is).
 - Suivi par canal : ajouter `?src=facebook`, `?src=gbp`, `?src=nextdoor`… aux liens vers le site ; l'événement `appel` d'Umami porte la source.
 
 ## Voix éditoriale
