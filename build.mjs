@@ -96,7 +96,7 @@ ${NAV(root)}
 </div></div></section>
 <section style="background:var(--fog);padding:48px 0"><div class="wrap"><h2 style="font-size:1.6rem;margin-bottom:16px">Autres zones d’intervention</h2><div class="zone">${CITIES.filter(x=>x!==c).map(x=>`<a class="tag" href="../elagage-${x.slug}/">${x.name}</a>`).join('')}</div></div></section>
 </main>
-<footer><div class="wrap"><span>© 2026 Samuel Élagage Abattage</span><span>Tarn · Aveyron</span></div></footer>
+<footer><div class="wrap"><span>© 2026 Samuel Élagage Abattage</span><span><a href="${root}mentions-legales/">Mentions légales</a> · Tarn · Aveyron</span></div></footer>
 <div class="callbar"><a class="btn btn-lime" href="tel:{{PHONE_TEL}}">Nous appeler · Devis gratuit</a></div>
 <script src="${root}js/track.js" defer></script>
 </body></html>`;

@@ -102,7 +102,7 @@ ${analytics}
 <div><a class="big" href="tel:{{PHONE_TEL}}">{{PHONE_DISPLAY}}</a>
 <div class="cta" style="margin-top:20px"><a class="btn btn-lime" href="tel:{{PHONE_TEL}}">Appeler</a><a class="btn btn-out" href="sms:{{PHONE_TEL}}">Envoyer un SMS</a></div>
 <p class="note" style="margin-top:18px">Devis et déplacement gratuits.</p></div></div></div></section>`;
-  const foot = (r) => `<footer><div class="wrap"><span>© 2026 Samuel Élagage Abattage</span><span>Tarn · Aveyron</span></div></footer>
+  const foot = (r) => `<footer><div class="wrap"><span>© 2026 Samuel Élagage Abattage</span><span><a href="${r}mentions-legales/">Mentions légales</a> · Tarn · Aveyron</span></div></footer>
 <div class="callbar"><a class="btn btn-lime" href="tel:{{PHONE_TEL}}">Nous appeler · Devis gratuit</a></div>
 <script src="${r}js/track.js" defer></script></body></html>`;
   const write = (dir, html, r) => {
@@ -129,6 +129,23 @@ ${NAV(root)}<main>
 <section style="padding-top:0"><div class="wrap"><div class="cards">${idxCards}</div></div></section>
 ${cta}</main>${foot(root)}`, root);
 
+  // ---- Mentions légales (racine +1 niveau) ----
+  write('mentions-legales', `${head('Mentions légales — Samuel Élagage Abattage', 'Mentions légales du site Samuel Élagage Abattage : éditeur, SIRET, hébergement.', 'mentions-legales/')}
+${NAV(root)}<main>
+<div class="page-hero"><div class="wrap"><p class="crumb"><a href="${root}">Accueil</a> › Mentions légales</p>
+<h1>Mentions <em>légales</em></h1></div></div>
+<section style="padding-top:0"><div class="wrap prose">
+<h2>Éditeur du site</h2>
+<p>Samuel Élagage Abattage (Samuel Seine), entrepreneur individuel.<br>SIRET : 511 072 753 00029.<br>Adresse : Place du Château, 81160 Saint-Juéry.<br>Téléphone : {{PHONE_DISPLAY}}.</p>
+<h2>Directeur de la publication</h2>
+<p>Samuel Seine.</p>
+<h2>Hébergement</h2>
+<p>Ce site est hébergé par GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, États-Unis (GitHub Pages).</p>
+<h2>Données et mesure d’audience</h2>
+<p>Ce site utilise Umami, un outil de mesure d’audience sans cookie, qui ne collecte aucune donnée personnelle identifiable.</p>
+</div></section>
+${cta}</main>${foot(root)}`, root);
+
   const root2 = '../../';
   ARTICLES.forEach(a => {
     const ld = { '@context': 'https://schema.org', '@type': 'Article', headline: a.title, description: a.desc,
@@ -142,5 +159,5 @@ ${NAV(root2)}<main>
 ${cta}</main>${foot(root2)}`, root2);
   });
 
-  return ['faq/', 'conseils/', ...ARTICLES.map(a => `conseils/${a.slug}/`)];
+  return ['faq/', 'conseils/', 'mentions-legales/', ...ARTICLES.map(a => `conseils/${a.slug}/`)];
 }
