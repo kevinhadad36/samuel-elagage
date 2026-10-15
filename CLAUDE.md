@@ -3,14 +3,16 @@
 - Services : élagage, abattage, taille de haie, débroussaillage, étêtage, entretien espaces verts. Camion-nacelle. Devis + déplacement gratuits.
 - Style : Refero "Wise" (https://styles.refero.design/style/367c0c6e-73a7-441c-a8ff-91d139ac60dc) — Forest Ink #163300 / Lime #9fe870, display Archivo Black.
 - Règles : aucun prix, avis, année d'expérience ou certification inventés. Photos réelles de Samuel (recadrées, plaques floutées, léger ajustement lumière uniquement).
-- À compléter : adresse/SIRET/mentions légales, avis Google, vrais tarifs, nom de domaine.
+- 17 ans d'expérience confirmés par Samuel (2026-10) — pas encore ajouté au site, à faire si souhaité.
+- À compléter : adresse/SIRET/mentions légales, avis Google, vrais tarifs.
 
 ## Build
 Ne pas éditer index.html ni elagage-*/ à la main : tout est généré.
 - Source : `src/index.template.html`, `css/style.css`, `build.mjs` (villes), `extra.mjs` (FAQ + articles du blog « Conseils »), `communes.mjs` (10 pages communes, avec 2 photos réelles de Samuel par page, jamais la même deux fois sur une page). Pour ajouter un article : l’ajouter dans ARTICLES de extra.mjs, puis `node build.mjs`.
 - Régénérer : `node build.mjs`
-- Domaine acheté : samuelelagage.fr (GitHub Pages, fichier CNAME). Quand le numéro de suivi/Umami / le numéro de suivi / Umami sont prêts :
-  `BASE=https://samuelelagage.fr PHONE=+33xxxxxxxxx UMAMI_ID=xxxx node build.mjs` puis commit + push.
+- Domaine acheté : samuelelagage.fr (GitHub Pages, fichier CNAME) — live, HTTPS actif.
+- Numéro de suivi OVH actif depuis le 2026-10-15 : 05 31 51 11 96 (+33531511196), redirige vers le mobile de Samuel. Déjà utilisé dans le build (`PHONE=+33531511196`) — ne plus utiliser le numéro direct de Samuel sur le site.
+- Build de référence utilisé : `BASE=https://samuelelagage.fr PHONE=+33531511196 node build.mjs` puis commit + push. UMAMI_ID toujours vide (pas d'analytics configuré pour l'instant).
 - Suivi par canal : ajouter `?src=facebook`, `?src=gbp`, `?src=nextdoor`… aux liens vers le site ; l'événement `appel` d'Umami porte la source.
 
 ## Voix éditoriale
